@@ -1,0 +1,69 @@
+<!-- const config = require("..") -->
+
+
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
+<section class="h-5/6 flex items-center justify-center  ">
+<div class="-mt-54 text-center">
+  Loading Payment Gateway<br/>
+  Please Wait...
+</div>
+</section>
+<script type="application/javascript" crossorigin="anonymous" src="https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/KzHAQX87362223007289.js" onload="onScriptLoad();"> </script>
+<!-- <script type="application/javascript" crossorigin="anonymous" src="https://securegw.paytm.in/merchantpgpui/checkoutjs/merchants/oMUbgB12181941748510.js" onload="onScriptLoad();"> </script> -->
+<script>
+  
+  function onScriptLoad(){
+    
+     var config = {
+        "root": "",
+        "flow": "DEFAULT",
+        "data": {
+        "orderId": "<%-orderID%>", /* update order id */
+        "token": '<%-txnToken%>', /* update token value */
+        "tokenType": "TXN_TOKEN",
+        "amount":   '<%-amount%>' /* update amount */
+        },
+        "handler": {
+          "notifyMerchant": function(eventName,data){
+            console.log("notifyMerchant handler function called");
+            console.log("eventName => ",eventName);
+            console.log("data => ",data);
+          } 
+        }
+      };
+
+      if(window.Paytm && window.Paytm.CheckoutJS){
+          window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
+              // initialze configuration using init method 
+              window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+                  // after successfully updating configuration, invoke JS Checkout
+                  window.Paytm.CheckoutJS.invoke();
+              }).catch(function onError(error){
+                  console.log("error => ",error);
+              });
+          });
+      } 
+  }
+  onScriptLoad();
+</script>
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '192998336855239'); 
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+   <img height="1" width="1" 
+  src="https://www.facebook.com/tr?id=192998336855239&ev=PageView
+  &noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+<div>
+</div>

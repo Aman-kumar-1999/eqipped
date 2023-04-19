@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="We deal in lab equipments on very reasonable prices.">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+<!-- Facebook Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+     fbq('init', '192998336855239'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+     <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=192998336855239&ev=PageView
+    &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+</head>
+
+<body class="min-h-5/6 w-full">
+
+
+    <section class="hero bgp " style="background-color: white;">
+        <div class="container-fluid ">
+
+            <div class="loadAnimation atom my-contain center-text">
+                <img data-aos="zoom-in" data-delay="100" class="centre-img atom-width atomring0"
+                    src="/img/atomring0.png" alt="atom-nucleus">
+                <img data-aos="zoom-in" data-delay="100" class="centre-img atom-width atomring1"
+                    src="/img/atomring1.png" alt="atom-ring1">
+                <img data-aos="zoom-in" data-delay="100" class="centre-img atom-width atomring2"
+                    src="/img/atomring2.png" alt="atom-ring2">
+
+            </div>
+        </div>
+
+
+        <div class="container-fluid bgp " style=" align-items: center; display: none; ">
+
+            <div class="mycontain center-text homehero">
+
+                <div class="home-hero-content ">
+                    <h1 class=" white-heading title"><span class="animation-comp"> India's Most</span><br /><span
+                            class="animation-comp">affordable deals</span><br /> <span class="animation-comp">on Lab
+                            needs</h1></span>
+                    <p class="p-hero desc .animation-comp">We provide lab equipment with the most affordable pricing so that you can have a BLAST in your lab. NOT LITERALLY THOUGH!</p>
+
+                </div>
+                <a href="/home" class="cta-button light-button w-button .animation-comp">Explore More</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container-fluid bgpp"></div>    
+
+    <div class="container-fluid bg " style="align-items: center; display: none;">
+        <img class="contain-img opacity-10 sm:opacity-10 " src="/img/flask.png" alt="flask image" srcset="">
+
+        <div class="mycontain center-text homehero">
+
+            <div class="home-hero-content">
+                <h1 class=" white-heading title"><span>Login<br /> to Place <br /> orders</h1></span>
+                <p class="p-hero desc"> Incredible Prices on Equipment | Extensive Consumer Support</p>
+
+            </div>
+            <a href="/login" class="cta-button light-button w-button">Login / Sign up</a>
+        </div>
+    </div>
+
+    <!-- <script src="/js/gallery.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        $(document).ready(function() {
+           
+     
+        AOS.init();
+        anime({
+            targets: '.atomring1',
+
+            rotate: '-0.25turn',
+            duration: 4000,
+        });
+        anime({
+            targets: '.atomring2',
+            rotate: '0.5turn',
+            duration: 4000,
+        }); 
+        anime({
+            targets: '.atomring0',
+            rotate: '-4turn',
+        });
+        var delayInMilliseconds = 1000; //1 second
+
+        setTimeout(function () {
+            $('.loadAnimation').css('display', 'none');
+            $('.bgp').css('display', 'block');
+           
+            $('.bg').css('display', 'block');
+
+            anime.timeline({ loop: false })
+                .add({
+                    targets: '.bgp .animation-comp',
+                    scale: [5, 1],
+                    opacity: [0, 1],
+                    easing: "easeOutCirc",
+                    duration: 500,
+                    delay: (el, i) => 500 * i
+                })
+        }, delayInMilliseconds);
+           });
+
+    </script>
+
+
+</body>
+
+</html>

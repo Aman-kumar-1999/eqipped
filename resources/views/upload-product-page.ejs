@@ -1,0 +1,97 @@
+<section>
+  <textarea name="" id="objectc" cols="30" rows="10"></textarea>
+  <button id = "objectsubmit" onclick = "myFunction()">Press to Enter Bulk Products</button>
+</section>
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '192998336855239'); 
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+   <img height="1" width="1" 
+  src="https://www.facebook.com/tr?id=192998336855239&ev=PageView
+  &noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+<script>
+  function myFunction(){
+    var item = JSON.parse( $("#objectc").val());
+    if(Array.isArray(item.price)){
+      var params = {
+          "sellerRole": "admin",
+          "name": item.name,
+          "price": JSON.stringify(item.price),
+          "GST": item.GST,
+          "image": "",
+          "HSN": item.HSN,
+          "vcode": JSON.stringify(item.code),
+          "brand": item.brand,
+          "categoryName": item.categoryName,
+          "containedLiquid": item.containedLiquid,
+          "description": "",
+          "itemWeight": "",
+          "netQuantity": "",
+          "piecePerPack": JSON.stringify(item.piecePerPack),
+          "packPrice": JSON.stringify(item.packPrice),
+          "size": item.size,
+          "volume": "",
+          "subCategory": "",
+          "isverified": "Yes"
+      }
+      $.ajax({
+              type: 'POST',
+              url: '/upload-product',
+              data: params,
+              dataType: 'json',
+              encode: true,
+          }).done(function (result) {
+              if (result.status == "success") {
+                alert('success');
+
+              }
+          })
+    }else{
+      var params = {
+          "sellerRole": "admin",
+          "name": item.name,
+          "price": item.price,
+          "GST": item.GST,
+          "image": "",
+          "HSN": item.HSN,
+          "vcode": item.code,
+          "brand": item.brand,
+          "categoryName": item.categoryName,
+          "containedLiquid": item.containedLiquid,
+          "description": "",
+          "itemWeight": "",
+          "netQuantity": "",
+          "piecePerPack": item.piecePerPack,
+          "packPrice": item.packPrice,
+          "size": item.size,
+          "volume": "",
+          "subCategory": "",
+          "isverified": "Yes"
+      }
+      $.ajax({
+              type: 'POST',
+              url: '/upload-novar-product',
+              data: params,
+              dataType: 'json',
+              encode: true,
+          }).done(function (result) {
+              if (result.status == "success") {
+                alert('success');
+
+              }
+          })
+    }
+  }
+</script>

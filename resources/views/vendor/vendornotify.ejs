@@ -1,0 +1,137 @@
+<section class="orders light-section min-h-full">
+    <div class="container mx-auto py-12 px-10">
+        <h1 class="font-bold text-lg mb-4">All Pending Notifications</h1>
+        <table class="w-full table-auto bg-white">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left">Order</th>
+                    <th class="px-4 py-2 text-left">OrderIds</th>
+                    <th class="px-4 py-2 text-left">Ordered Items</th>
+                    <th class="px-4 py-2 text-left">Notifications</th>
+                    <th class="px-4 py-2 text-left">Status</th>
+                    <th class="px-4 py-2 text-left">Placed at</th>
+                    <!-- <th class="px-4 py-2 text-left">Contact Us</th> -->
+                    <th class="px-4 py-2 text-left">Take Order?</th>
+                </tr>
+            </thead>
+            <!-- <tbody id="notificationTableBody"> -->
+
+            <tbody class="">
+
+                <% gid.forEach((item) => { %>
+                    <% item.orders.forEach((order, index)=> { %>
+                        <tr>
+                            <% if(index == 0){ %>
+                                <td class="border px-4 py-2 text-green-900" rowspan="<%= item.orders.length %>">
+                                    <p>
+                                        <%= item.id %>
+                                    </p>
+                                </td>
+                            <% } %>
+                            <td class="border px-4 py-2 text-green-900">
+                                <p>
+                                    <%= order.orderId %>
+                                </p>
+                            </td>
+    
+                            <td class="border px-4 py-2 text-green-900 text-sm">
+                                    <p>
+                                   <span>Item: </span><%= order.name %> <br>
+                                        <span>Qty:</span>  <%= order.quantity %>
+                                    </p>
+                            </td>
+                            <td class="border px-4 py-2 text-gray-700 text-sm">Mentioned items has been sold by eqipped. Please pack krke rakho jaldi se.</td>
+    
+                            <td class="border px-4 py-2">
+                                <div class="inline-block relative w-64">
+                                    <% if(order.vendorStatus == 'approved'){ %>
+                                        <form action="/vendor/order/status" method="POST">
+                                            <input type="hidden" name="orderId" value="<%= order.id %>">
+                                            <!-- <select name="status" onchange="this.form.submit()" -->
+                                            <select name="status" onchange = "this.form.submit()" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <% if(order.status == 'order_placed'){ %>
+                                                    <option selected>Order Placed</option>
+                                                <% } %>
+                                                <% if(order.status == 'confirmed'){ %>
+                                                    <option selected> Notification received</option>
+                                                <% }else{ %>
+                                                    <option value="confirmed"> Notification received</option>
+                                                <% } %>
+                                                <% if(order.status == 'prepared'){ %>
+                                                    <option selected>Ready to pick</option>
+                                                <% }else{ %>
+                                                    <option value="prepared">Ready to pick</option>
+                                                <% } %>
+                                                
+                                               
+                                            </select>
+                                        </form>
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20">
+                                                <path
+                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                            </svg>
+                                        </div>
+                                    <% }else{ %>
+                                        <p>Please Accept Order to Update Status</p>
+                                    <% } %>
+                                </div>
+                            </td>
+    
+                            <td class="border px-4 py-2">
+                                    <p>
+                                        <%= moment(order.createdAt).format('hh:mm A') %>
+                                    </p>
+                            </td>
+    
+                            <% if(order.status == 'cancelled'){ %>
+                                <td id="OrderStatusID"class=" text-center bg-red-500 text-white">
+                                    <%= order.status%> by customer
+                                </td>
+                            <% }else{ %>
+                                <% if(order.vendorStatus == 'pending'){ %>
+                                    <td class="border px-4 py-2">
+                                        <div style= "display: flex;justify-content: space-around;">
+                                            <i class = "fa fa-check" style = "color: green" onclick = "statusCheck('<%= order.id %>', 'approve')"></i>
+                                            <i class = "fa fa-times" style = "color: red" onclick = "statusCheck('<%= order.id %>', 'decline')"></i>
+                                        </div>
+                                    </td>
+                                <% }else{ %>
+                                    <td class="border px-4 py-2">
+                                        <%= order.vendorStatus %>
+                                    </td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    <% }) %>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<script>
+    function statusCheck(oid, action){
+
+        console.log(oid);
+        console.log(action);
+        var params = {
+                    oid: oid,
+                    action: action,
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/update-order-status',
+            data: params,
+            dataType: 'json',
+            encode: true,
+        }).done(function (result) {
+            if (result.status == "success") {
+               location.reload()
+            }
+        })
+    }
+</script>

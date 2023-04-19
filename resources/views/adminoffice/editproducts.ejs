@@ -1,0 +1,339 @@
+<section class="logi md:px-12 min-h-full">
+
+    <h2 class="m-8 text-center text-3xl font-extrabold text-gray-900">
+        Edit Eqipped Product
+    </h2>
+
+    <section class="container flex mx-auto py-8 md:px-20">
+        <div class="flex w-full sm:px-10">
+            <div style="width: 41.1rem;">
+
+                <form class="flex justify-center w-full mx-auto" action="/office/edit/products" method="post">
+
+                    <div class=" w-full">
+                        <div class="flex mx-auto">
+
+                            <% if(messages.error) { %>
+                                <span class="text-red-600 text-xs mx-auto text-center font-medium">
+                                    <%= messages.error%>
+                                </span>
+                                <% } %>
+
+                        </div>
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="name" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Product Name</label>
+                                <input name="pname" type="text" required placeholder="Product name..." id="name"
+                                    value="<%= data.pname %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+
+                            <div class="w-full lg:w-80 mt-4">
+                                <label class="block mb-3 text-sm font-semibold text-gray-500"
+                                    for="categoryName">Category Name : "<%=data.category.pcategory%>"</label>
+                                <select name="category" id="category-dropdown"
+                                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                    <option value="<%=data.category._id %>">select</option>
+                                    <% categories.forEach((category)=> { %>
+                                        <option value="<%= category._id %>">
+                                            <%= category.pcategory %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+
+                            <div class="mt-4">
+                                <label for="image" class="block mb-3 text-sm font-semibold text-gray-500">Upload
+                                    Image</label>
+                                <input id="image" name="image" type="file" multiple requir disabled
+                                    class="w-full px-5 py-1 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="brand" class="block mb-3 text-sm font-semibold text-gray-500">Brand
+                                    Name: "<%= data.brand.name %>"</label>
+                                <select name="brand" id="brand-dropdown"
+                                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                    <option value="<%= data.brand._id %>">select</option>
+                                    <% brands.forEach((brand)=> { %>
+                                        <option value="<%= brand._id %>">
+                                            <%= brand.name %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="HSN" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    HSN Number </label>
+                                <input name="HSN" type="number" required placeholder="HSN NO." id="HSN"
+                                    value="<%= data.HSN %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="GST" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    G.S.T Slab of this Product</label>
+                                <input name="GST" type="text" required placeholder="GST %" id="GST"
+                                    value="<%= data.GST %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="itemWeight" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Item Weight</label>
+                                <input name="itemWeight" type="text" requir placeholder="Item Weight" id="Item Weight"
+                                    value="<%= data.itemWeight %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+
+
+                            <div class="mt-4">
+                                <label for="image" class="block mb-3 text-sm font-semibold text-gray-500">Upload 3D
+                                    Image(Optional)</label>
+                                <input disabled id="image" name="3dImage" type="file" single
+                                    class="w-full px-5 py-1 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+
+                            <!-- <div class="w-full lg:w-80 mt-4">
+                                <label for="subCategory" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Sub-category</label>
+                                <input name="subCategory" type="text" placeholder="subCategory"
+                                    id="subCategory"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div> -->
+
+
+                        </div>
+
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="itemWeight" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Variation label</label>
+                                <input name="variationLabel" type="text" required placeholder="variationLabel"
+                                    id="variationLabel" value="<%= data.variationLabel %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="variationname" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Variation name</label>
+
+                                <input name="variationname" type="text" required placeholder="variationname"
+                                    id="variationname" value="<%= data.variationname %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="itemWeight" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Product code</label>
+                                <input name="vcode" type="text" required placeholder="vcode" id="vcode"
+                                    value="<%= data.vcode %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="variationname" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Variation group code</label>
+
+                                <input name="gcode" type="text" required placeholder="gcode" id="gcode"
+                                    value="<%= data.gcode %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="itemWeight" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Price</label>
+                                <input name="price" type="text" required placeholder="price" id="price"
+                                    value="<%= data.price %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="piecePerPack" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Piece-per-pack</label>
+
+                                <input name="piecePerPack" type="text" required placeholder="piecePerPack"
+                                    id="piecePerPack" value="<%= data.piecePerPack %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+
+                            <div class="w-full lg:w-80 mt-4">
+                                <label class="block mb-3 text-sm font-semibold text-gray-500"
+                                    for="containedLiquid">Contained Liquid : "<%= data.containedLiquid %>"</label>
+                                <div
+                                    class="sm:flex justify-around align-center block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                    <span class="volumeSwitch"><span class="mr-1">Yes</span><input type="radio"
+                                            id="containedLiquid" name="containedLiquid" value="Yes"></span>
+                                    <span class="volumeSwitchOff"><span class="mr-1">No</span><input type="radio"
+                                            id="containedLiquid" name="containedLiquid" checked="checked"
+                                            value="No"></span>
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="packPrice"
+                                    class="block mb-3 text-sm font-semibold text-gray-500">packPrice</label>
+                                <input name="packPrice" type="text" required placeholder="packPrice" id="packPrice"
+                                    value="<%= data.packPrice %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full  lg:w-12/12 mt-4">
+                                <label for="description" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Description</label>
+                                <input name="description" type="text" requi placeholder="Description" id="description"
+                                    value="<%= data.description %>"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+
+                        <div class="flex justify-center mt-10">
+                            <button type="submit"
+                                class="button btn-navigate-form-step group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Upload
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" name="vid" value="<%= data.id %>">
+
+                </form>
+
+            </div>
+
+
+            <div class="row w-full justify-center flex">
+                <div class="col-sm-12 w-1/2 flex items-center flex-col">
+                    <% data.image.forEach((images)=> { %>
+
+                        <div class="m-3 flex items-center">
+                            <img class="h-40 mx-aut rounded-lg" src="/img/<%= images.imgName %>" alt="">
+
+                            <a href="/delImgEditProd/<%= images._id %>/<%= data._id %>">
+                                <span class="p-2 px-3 m-3 rounded-xl bg-gray-200 cursor-pointer"><i
+                                        class="fa-solid fa-xmark"></i></span>
+                            </a>
+                        </div>
+
+                        <% }) %>
+
+
+
+                            <form action="/addImgEditProd" method="post" enctype="multipart/form-data"
+                                id="showFormInput" class="jatar">
+
+                                <!-- <div class="mt-4">
+                                    <label for="image" class="block mb-3 text-sm font-semibold text-gray-500">Upload
+                                        Images</label>
+                                    <input name="image" type="file" multiple required
+                                        class="form-control-file w-full px-5 py-1 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+
+                                    <input type="hidden" name="vid" value="<%= data._id %>">
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="mx-auto block py-1 px-3 rounded-lg bg-gray-200"
+                                        type="submit">Upload</button>
+                                </div> -->
+
+                            </form>
+
+                            <div
+                                class="imgUpShowBtn p-6 m-3 flex justify-center items-center rounded-full bg-gray-200 cursor-pointer">
+                                <i style="font-size: 30px;" class="fa-sharp fa-solid fa-plus"></i>
+                            </div>
+
+
+
+                </div>
+            </div>
+
+
+            <!-- <div style="width: 35rem;" class="hidden lg:block">
+                <img class="opacity-75" style="z-index: -1; position: absolute; top:12rem; right: 5%; width: 50%;"
+                    src="/img/addproduct.png" alt="" srcset="">
+            </div> -->
+
+        </div>
+
+    </section>
+
+</section>
+
+
+
+<script>
+
+    let vol1 = document.querySelector('.imgUpShowBtn')
+    let vol2 = document.querySelector('.volumeSwitchOff')
+
+    vol1.addEventListener("click", switchOn);
+    vol2.addEventListener("click", switchOff);
+
+    function switchOn() {
+        document.getElementById("showFormInput").innerHTML = `<div class="mt-4">
+                                    <label for="image" class="block mb-3 text-sm font-semibold text-gray-500">Upload
+                                        Images</label>
+                                    <input name="image" type="file" multiple required
+                                        class="form-control-file w-full px-5 py-1 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+
+                                    <input type="hidden" name="vid" value="<%= data._id %>">
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="mx-auto block py-1 px-3 rounded-lg bg-gray-200"
+                                        type="submit">Upload</button>
+                                </div>`;
+        document.querySelector('.imgUpShowBtn').style.visibility = "hidden";
+    }
+
+    function switchOff() {
+        document.getElementById("volSwitch").style.visibility = "hidden";
+    }
+
+</script>
+
+
+
+
+
+<!-- <script>
+
+    let vol1 = document.querySelector('.volumeSwitch')
+    let vol2 = document.querySelector('.volumeSwitchOff')
+
+    vol1.addEventListener("click", switchOn);
+    vol2.addEventListener("click", switchOff);
+
+    function switchOn() {
+        document.getElementById("volSwitch").innerHTML = `<label for="volume" class="block mb-3 text-sm font-semibold text-gray-500">Volume</label> 
+<input name="volume" type="text" value="<%= data.volume %>" placeholder="Volume" id="volume" class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">`;
+        document.getElementById("volSwitch").style.visibility = "visible";
+    }
+
+    function switchOff() {
+        document.getElementById("volSwitch").style.visibility = "hidden";
+    }
+
+</script> -->

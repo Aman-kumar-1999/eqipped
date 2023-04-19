@@ -1,0 +1,249 @@
+<style>
+    div.preview-images>img {
+        width: 50%;
+    }
+</style>
+
+
+
+<section class="logi md:px-12 min-h-full">
+
+    <h2 class="m-10 text-center text-3xl font-extrabold text-gray-900 ">
+        List Your Products
+    </h2>
+
+
+    <section class="container flex mx-auto py-8 md:px-20">
+        <div class="flex w-full sm:px-10">
+            <div style="width: 41.1rem;">
+                
+                <form class="flex justify-center w-full mx-auto" action="/addproduct" method="post"
+                    enctype="multipart/form-data">
+
+                    <div class=" w-full">
+                        <div class="flex mx-auto">
+
+                            <% if(messages.error) { %>
+                                <span class="text-red-600 text-xs mx-auto text-center font-medium">
+                                    <%= messages.error%>
+                                </span>
+                                <% } %>
+
+                        </div>
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="name" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Product Name</label>
+                                <input name="pname" type="text" required placeholder="Product name..." id="name"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+
+                            <div class="w-full lg:w-80 mt-4">
+                                <label class="block mb-3 text-sm font-semibold text-gray-500"
+                                    for="categoryName">Category Name</label>
+                                <select name="category" id="category-dropdown"
+                                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                    <option value="">select</option>
+                                    <% categories.forEach((category)=> { %>
+                                        <option value="<%= category._id %>">
+                                            <%= category.pcategory %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+
+                            <div class="mt-4">
+                                <label for="image" class="block mb-3 text-sm font-semibold text-gray-500">Upload
+                                    Image</label>
+                                <input id="input-files" name="image" type="file" multiple required
+                                    class="form-control-file w-full px-5 py-1 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="brand" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Brand Name</label>
+                                <select name="brand" id="brand-dropdown"
+                                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                    <option value="">select</option>
+                                    <% brands.forEach((brand)=> { %>
+                                        <option value="<%= brand._id %>">
+                                            <%= brand.name %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="HSN" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    HSN Number </label>
+                                <input name="HSN" type="number" required placeholder="HSN NO." id="HSN"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="GST" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    G.S.T Slab of this Product</label>
+                                <input name="GST" type="text" required placeholder="GST %" id="GST"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="itemWeight" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Item Weight</label>
+                                <input name="itemWeight" type="text" requir placeholder="Item Weight" id="Item Weight"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="image" class="block mb-3 text-sm font-semibold text-gray-500">Upload 3D
+                                    Image(Optional)</label>
+                                <input id="3dImage" name="d3Image" type="file"
+                                    class="w-full px-5 py-1 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="itemWeight" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Variation label</label>
+                                <input name="variationLabel" type="text" required placeholder="variationLabel"
+                                    id="variationLabel"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="variationname" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Variation name</label>
+
+                                <input name="variationname" type="text" required placeholder="variationname"
+                                    id="variationname"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="itemWeight" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Product code</label>
+                                <input name="vcode" type="text" required placeholder="vcode" id="vcode"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="variationname" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Variation group code</label>
+
+                                <input name="gcode" type="text" required placeholder="gcode" id="gcode"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="itemWeight" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Price</label>
+                                <input name="price" type="text" required placeholder="price" id="price"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="piecePerPack" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Piece-per-pack</label>
+
+                                <input name="piecePerPack" type="text" required placeholder="piecePerPack"
+                                    id="piecePerPack"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="containedLiquid" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Contains Liquid</label>
+                                <div
+                                    class="sm:flex justify-around align-center block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                    <span class="volumeSwitch"><span class="mr-1">Yes</span><input type="radio"
+                                            id="containedLiquid" name="containedLiquid" value="Yes"></span>
+                                    <span class="volumeSwitchOff"><span class="mr-1">No</span><input type="radio"
+                                            id="containedLiquid" name="containedLiquid" checked="checked"
+                                            value="No"></span>
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-80 mt-4">
+                                <label for="packPrice"
+                                    class="block mb-3 text-sm font-semibold text-gray-500">packPrice</label>
+                                <input name="packPrice" type="text" required placeholder="packPrice" id="packPrice"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+
+                        <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                            <div class="w-full  lg:w-12/12 mt-4">
+                                <label for="description" class="block mb-3 text-sm font-semibold text-gray-500">
+                                    Description</label>
+                                <input name="description" type="text" requir placeholder="Description"
+                                    id="description"
+                                    class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                            </div>
+                        </div>
+
+
+
+                        <div class="flex justify-center mt-10">
+                            <button type="submit"
+                                class="button btn-navigate-form-step group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Upload
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="preview-images"></div>
+                </div>
+            </div>
+
+
+            <!-- <div style="width: 35rem;" class="hidden lg:block">
+                <img class="opacity-75" style="z-index: -1; position: absolute; top: 12rem; right: 5%; width: 50%;"
+                    src="/img/addproduct.png" alt="" srcset="">
+            </div> -->
+
+        </div>
+    </section>
+
+
+
+    <script>
+        $(document).ready(function () {
+            let imagesPreview = function (input, placeToInsertImagePreview) {
+                if (input.files) {
+                    let filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            $($.parseHTML("<img>"))
+                                .attr("src", event.target.result)
+                                .appendTo(placeToInsertImagePreview);
+                        };
+                        reader.readAsDataURL(input.files[i]);
+                        console.log(input.files)
+                    }
+                }
+            };
+            $("#input-files").on("change", function () {
+                imagesPreview(this, "div.preview-images");
+            });
+        });
+    </script>

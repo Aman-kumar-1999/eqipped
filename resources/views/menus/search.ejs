@@ -1,0 +1,221 @@
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<!-- Facebook Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+     fbq('init', '192998336855239'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+     <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=192998336855239&ev=PageView
+    &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+
+<!--Category Navigation Bar-->
+
+<div style="justify-content: space-evenly; " class="w-full h-20 sm:h-28 flex content-center mt-2">
+    <% allCategory.forEach(function(nashta){ %>
+        <a href="/Category/<%= nashta.pcategory %>/<%= nashta._id%>/1">
+            <div data-chai="<%= JSON.stringify(nashta) %>" style="display: flex;" class="sub-cat">
+                <div class="dropdown  relative  flex justify-center items-center" style=" flex-direction: column;">
+                    <button class="text-gray-700 font-semibold  rounded inline-flex items-center">
+                        <span class="">
+                            <lottie-player src="<%= nashta.pimage %>" class="w-12 h-12 md:w-20 md:h-20"
+                                background="transparent" speed="1" loop autoplay></lottie-player>
+                        </span>
+                    </button>
+                    <h1 class="text-center font-medium text-xxs sm:text-xs ">
+                        <%= nashta.pcategory %>
+                    </h1>
+                    <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+                    </ul>
+                </div>
+            </div>
+        </a>
+        <% }) %>
+</div>
+
+
+<section class="menu container mx-auto py-8 min-h-full">
+    <% if(brands.length<=0 && products.length<=0){%>
+        <div class="flex justify-center mb-10 ">
+            <div class=" float-left flex items-center justify-center h-scree">
+                <h1 style="font-family: 'Bangers', cursive; font-size: 50px;">well it's awkward <br /><span
+                        style="color: #695CFE;"> results </span>not found</h1>
+            </div>
+            <lottie-player src="https://assets5.lottiefiles.com/private_files/lf30_3X1oGR.json" background="transparent"
+                speed="1" style="width: 500px; height: 500px;" loop autoplay></lottie-player>
+        </div>
+
+        <%}else{%>
+            <h1 class="text-xl font-bold text-center p-2 pb-1 heading-font">Search Results</h1>
+            <p class="text-sm text-center text-gray-400 pb-6 shadow-sm">( Showing <%=brands.length + products.length %>
+                    results )</p>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 col-gap-12 row-gap-16">
+                <% brands.forEach((brand)=> {
+                    if(brand.image[0].imgName !== "default.webp"){ %>
+                    <div class="flex flex-col items-center gap-2 px-2 py-6 relative hover:shadow-lg">
+                        <a href="/productDetails/<%= brand.pname %>/<%= brand._id %>/1"
+                            class="flex flex-col items-center text-center group">
+                            <div class="w-36 h-36">
+                                <img draggable="false" class="w-full h-full object-contain"
+                                src="/img/<%= brand.image[0].imgName %>" alt="<%= brand.name %>" />
+                            </div>
+                            <h2 class="text-sm mt-4 group-hover:text-blue-500">
+                                <%= brand.pname %>
+                            </h2>
+                            <span class="text-gray-400 text-xs ">Brand: <%= brand.brand.name %></span>
+
+                            <div class="flex flex-col gap-2 items-center">
+
+                                <span class="text-sm text-gray-500 font-medium flex gap-2 items-center">
+                                    <%if(brand.reviews.length> 0){%>
+                                        <span class="text-sm text-gray-500 font-medium flex gap-2 items-center">
+                                            <span style="background-color: #388e3c;"
+                                                class="text-xs px-1.5 py-0.5 mt-2 rounded-sm text-white flex items-center gap-0.5">
+                                                <%=brand.avgrating.toFixed(1)%><img
+                                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMiI+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTYuNSA5LjQzOWwtMy42NzQgMi4yMy45NC00LjI2LTMuMjEtMi44ODMgNC4yNTQtLjQwNEw2LjUuMTEybDEuNjkgNC4wMSA0LjI1NC40MDQtMy4yMSAyLjg4Mi45NCA0LjI2eiIvPjwvc3ZnPg=="
+                                                        class="_1wB99o">
+                                            </span>
+                                            <span>(<%=brand.reviews.length%>)</span>
+                                        </span>
+
+                                        <%} %>
+
+                                </span>
+                            </div>
+                            <div class="flex flex-col gap-2 items-center">
+
+                                    <div class="flex items-center gap-1.5 text-md font-medium">
+                                        <span>₹<%= Math.ceil((brand.packPrice) -
+                                                ((brand.packPrice)*(brand.brand.discount)/100)) %></span>
+                                        <span class="text-gray-500 line-through text-xs">₹<%= brand.packPrice %>
+                                        </span>
+                                        <span class="text-xs font-medium text-lime-500">
+                                            <%= brand.brand.discount %>%&nbsp;off
+                                        </span>
+                                    </div>
+
+                            </div>
+                        </a>
+                    </div>
+                    <%}else{%>
+                    <% }}) %>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 col-gap-12 row-gap-16">
+                <% products.forEach((product)=> {
+                    if(product.image[0].imgName !== "default.webp"){ %>
+                    <div class="flex flex-col items-center gap-2 px-2 py-6 relative hover:shadow-lg">
+
+                        <a href="/productDetails/<%= product.pname %>/<%= product._id %>/1"
+                            class="flex flex-col items-center text-center group">
+
+
+                            <div class="w-36 h-36">
+                                <img draggable="false" class="w-full h-full object-contain"
+                                    src="/img/<%= product.image[0].imgName %>" alt="<%= product.pname %>" />
+                            </div>
+
+
+                            <% if(product.variationname !='' && product.variationname !='undefined' &&
+                                product.variationname !=null && product.piecePerPack> 1) { %>
+                                <h2 class="text-sm mt-4 group-hover:text-blue-500">
+                                    <%= product.pname %> - <%= product.variationname %> (<%= product.piecePerPack %>
+                                                Pcs)
+                                </h2>
+                                <% } else if(product.variationname !='' && product.variationname !='undefined' &&
+                                    product.variationname !=null) {%>
+                                    <h2 class="text-sm mt-4 group-hover:text-blue-500">
+                                        <%= product.pname %> - <%= product.variationname %>
+                                    </h2>
+                                    <% } else { %>
+                                        <h2 class="text-sm mt-4 group-hover:text-blue-500">
+                                            <%= product.pname %>
+                                        </h2>
+                                        <% } %>
+
+
+                                            <% if(product.brand){ %>
+                                                <span class="text-gray-400 text-xs ">Brand: <%= product.brand.name %>
+                                                </span>
+                                                <% } %>
+
+                                                    <div class="flex flex-col gap-2 items-center">
+
+                                                        <div class="flex items-center gap-1.5 text-md font-medium">
+                                                            <span>₹<%= Math.ceil((product.packPrice) -
+                                                                    ((product.packPrice)*(product.brand.discount)/100))
+                                                                    %></span>
+                                                            <% if(product.brand.discount>= 1) {%>
+                                                                <span class="text-gray-500 line-through text-xs">₹<%=
+                                                                        product.packPrice %>
+                                                                </span>
+                                                                <span class="text-xs font-medium text-lime-500">
+                                                                    <%= product.brand.discount %>%&nbsp;off
+                                                                </span>
+                                                                <% } %>
+
+                                                        </div>
+
+                                                    </div>
+                        </a>
+                    </div>
+                    <%}else{%>
+                    <% }}) %>
+            </div>
+
+            <%}%>
+</section>
+
+
+<script>
+    
+function india(aww) {
+          $('#searchProduct').val(aww);
+          document.getElementById("submitSearch").click()
+      }
+
+function sendData(e) {
+        const searchResults = document.getElementById('searchResults')
+        let match = e.value.match(/^[a-zA-Z ]*/);
+        let match2 = e.value.match(/\s*/);
+        if (match2[0] === e.value) {
+          searchResults.innerHTML = '';
+          return;
+        }
+        if (match[0] === e.value) {
+          fetch('getProductNamesForSearch', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ payload: e.value })
+          }).then(res => res.json()).then(data => {
+            let payload = data.payload;
+            searchResults.innerHTML = '';
+            if (payload.length < 1) {
+              searchResults.innerHTML = '<p>Sorry, Nothing Found.</p>';
+              return;
+            }
+            payload.forEach((item, index) => {
+              if (index > 0) searchResults.innerHTML += '<hr>';
+              searchResults.innerHTML += `<div onclick="india('${item.pname}')" class="flex px-2 cursor-pointer items-center w-28"> <img class="h-10 py-1 object-contain"
+                            src="/img/${ item.image[0].imgName}" alt="${item.pname}" />
+                             <span class="p-2 px-4 text-xs">${item.pname}</span></div>`
+            });
+          });
+          return;
+        }
+        searchResults.innerHTML = '';
+      }
+
+</script>
+

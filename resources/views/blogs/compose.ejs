@@ -1,0 +1,35 @@
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '192998336855239'); 
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+   <img height="1" width="1" 
+  src="https://www.facebook.com/tr?id=192998336855239&ev=PageView
+  &noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+
+<div class="text-center">
+  
+<h1>Compose</h1>
+<form action="/compose" method="POST">
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Title</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="composetitle" >
+      </div> 
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Post</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="composetext"></textarea>
+      </div>
+    <button type="submit" class="btn btn-primary" >Publish</button>
+</form>
+</div>

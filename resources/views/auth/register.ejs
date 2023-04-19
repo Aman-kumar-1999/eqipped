@@ -1,0 +1,473 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '192998336855239'); 
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+   <img height="1" width="1" 
+  src="https://www.facebook.com/tr?id=192998336855239&ev=PageView
+  &noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+<script>
+  function callAjax() {
+    var pincode = $('#pincode').val();
+    if ($('#pincode').val().length != 6) {
+
+      $('#city').val('');
+      $('#state').val('');
+      $('#country').val('');
+    }
+    else {
+      $.ajax({
+        url: "pincodeAjax/",
+        type: "POST",
+
+        data: "pincode=" + pincode,
+        success: function (obj) {
+          if (obj == '') {
+            $('#city').val('');
+            $('#state').val('');
+            $('#country').val('');
+          }
+          $('#city').val(obj.city);
+          $('#state').val(obj.state);
+          $('#country').val(obj.country);
+        },
+        error: function () {
+          $('#city').val('');
+          $('#state').val('');
+          $('#country').val('');
+        }
+      })
+    }
+  }
+
+
+  //  This snippet changes the option colour
+
+  $(document).ready(function () {
+    $('#bType').css('color', 'gray');
+    $('#bType').change(function () {
+      var current = $('#bType').val();
+      if (current == 'Vendor') {
+        $('#role').val("vendor");
+      } else {
+        $('#role').val("customer");
+      }
+
+      if (current != '') {
+        $('#bType').css('color', 'black');
+      }
+    });
+  });
+
+
+</script>
+
+
+<div class="form-border">
+  <div style="min-width: 50%">
+    <div>
+      <h2 class="m-10 text-center text-3xl font-extrabold text-gray-900 ">
+        Create Account
+      </h2>
+    </div>
+    <div id="multi-step-form-container">
+      <!-- Form Steps / Progress Bar -->
+      <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
+        <!-- Step 1 -->
+        <li class="form-stepper-active text-center form-stepper-list" step="1">
+          <a type="button" step_number="1" class="mx-2 btn-navigate-form-step">
+            <span class="form-stepper-circle">
+              <span>1</span>
+            </span>
+            <div class="label">Account Details</div>
+          </a>
+        </li>
+        <!-- Step 2 -->
+
+        <!-- Step 3 -->
+        <li class="form-stepper-unfinished text-center form-stepper-list" step="2">
+          <a class="mx-2">
+            <span class="form-stepper-circle text-muted">
+              <span>2</span>
+            </span>
+            <div class="label text-muted">Verify</div>
+          </a>
+        </li>
+      </ul>
+
+
+
+
+
+      <!-- Step Wise Form Content -->
+      <form id="userAccountSetupForm" name="userAccountSetupForm" action="/register" method="POST">
+        <!-- Step 1 Content -->
+        <section id="step-1" class="form-step">
+          <h2 class="font-normal">Account Details</h2>
+          <!-- Step 1 input fields -->
+
+
+          <div class="w-3/4 flex mx-auto mt-4">
+
+            <% if(messages.error) { %>
+              <span class="text-red-600 text-xs mx-auto text-center font-medium">
+                <%= messages.error %>
+              </span>
+              <% } %>
+
+                <% if(messages.OnRegisterDone) { %>
+                  <script>
+                    swal("User Successfully Registered", "Thank you", "success")
+                  </script>
+                  <% } %>
+
+          </div>
+
+
+          <div class="mt-3 border-gray-500 ">
+
+            <div class="space-x-0 lg:flex lg:space-x-4 mt-2">
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="first-name" class="sr-onl block mb- text-sm font-semibold text-gray-500">First Name</label>
+                <input id="first-name" name="fname" value="<%= messages.fname%>" type="text" required
+                  class="appearance-none   relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="First Name">
+              </div>
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="last-name" class="block mb- text-sm font-semibold text-gray-500">
+                  Last Name</label>
+                <input id="last-name" name="lname" value="<%= messages.lname%>" type="text" required
+                  class="appearance-none   relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Last name">
+              </div>
+            </div>
+
+
+            <div class="space-x-0 lg:flex lg:space-x-4 mt-">
+              <div class="w-full lg:w-80 mt-4">
+                <label class="block mb- text-sm font-semibold text-gray-500" for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" pattern="[0-9]{10}" maxlength="10"
+                  title="Please enter exactly 10 digits" value="<%= messages.phone%>" required
+                  class="appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Phone">
+              </div>
+
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="email" class="block mb- text-sm font-semibold text-gray-500">
+                  Email</label>
+                <input id="email" name="email" value="<%= messages.email%>" type="email" autocomplete="email" required
+                  class="appearance-none  relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Email">
+              </div>
+            </div>
+
+            <input class="hidden" type="text" name="role" id="role">
+
+            <div class="space-x-0 lg:flex lg:space-x-4 mt-2">
+
+              <div class="w-full mt-4">
+                <label for="bType" class="block mb- text-sm font-semibold text-gray-500">
+                  Register as</label>
+                <select id="bType" required name="registerAs"
+                  class="appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
+                  <option disabled selected hidden>Click to select ▽</option>
+                  <option value="School">School / Junior College</option>
+                  <option value="College">College / University</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Vendor">Vendor / Distributer</option>
+                </select>
+              </div>
+
+              <div class="w-full mt-4">
+                <label for="institution-name" class="sr-onl block mb- text-sm font-semibold text-gray-500">Organization
+                  Name</label>
+                <input id="institution-name" name="institutionName" value="<%= messages.institutionName%>" type="text"
+                  required
+                  class="appearance-none   relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Institution name">
+              </div>
+
+
+            </div>
+
+
+            <div class="space-x-0 lg:flex lg:space-x-4">
+              <div class="w-full lg:w-80 mt-4">
+                <label for="designation" class="block mb- text-sm font-semibold text-gray-500">
+                  Designation</label>
+                <input id="user-designation" name="designation" value="<%= messages.designation%>" type="text" required
+                  class="appearance-none   relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="Designation">
+              </div>
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="pincode" class="block mb- text-sm font-semibold text-gray-500">
+                  Area Pincode</label>
+                <input id="pincode" name="pincode" value="<%= messages.pincode%>" type="text" required
+                  pattern="[0-9]{6}" minlength="6" maxlength="6"
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57" onkeyup="callAjax()"
+                  class="appearance-none  relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="xxx-xxx">
+              </div>
+            </div>
+
+            <div class="space-x-0 lg:flex lg:space-x-4 mt-">
+              <div class="w-full lg:w-80 mt-4">
+                <label for="city" class="block mb- text-sm font-semibold text-gray-500">
+                  City</label>
+                <input id="city" name="city" type="text" required readonly="readonly" value="<%= messages.city%>"
+                  class="appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder=>
+              </div>
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="state" class="block mb- text-sm font-semibold text-gray-500">
+                  State</label>
+                <input id="state" name="state" type="text" required readonly="readonly" value="<%= messages.state%>"
+                  class="appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm">
+              </div>
+            </div>
+
+
+            <input class="hidden" type="text" id="country" name="country" required readonly="readonly"
+              value="<%= messages.country %>" placeholder="hey">
+
+            <div id="saveCon" class="mt-4 space-x-0 lg:flex lg:space-x-4">
+              <button
+                class="button group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                type="button" onclick="callAjaxOtp()">Save & Continue</button>
+            </div>
+
+            <div id="saveCon" class="hidden">
+              <button id="clickOk"
+                class="button btn-navigate-form-step group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                type="button" step_number="2">Save & Continue</button>
+            </div>
+
+        </section>
+
+        <!-- Step 2 Content, default hidden on page load. -->
+        <section id="step-2" class="form-step d-none">
+          <h2 class="font-normal">Verify</h2>
+          <!-- Step 3 input fields -->
+          <div class="mt-3">
+            <div class="space-x-0 lg:flex lg:space-x-4 pb-">
+
+              <div class="w-full lg:w-80 mt-4">
+                <label for="notp" class="block mb- text-sm font-semibold text-gray-500">Phone
+                  OTP*</label>
+                <input id="otp" name="otp" type="text" required
+                  class="appearance-none   relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                  placeholder="verification code">
+              </div>
+
+
+
+
+            </div>
+          </div>
+
+
+
+          <div class="space-x-0 lg:flex lg:space-x-4 mt-">
+            <div class="w-full lg:w-80 mt-4">
+              <label for="password" class="block mb- text-sm font-semibold text-gray-500">
+                Password
+
+                <% if(messages.password) { %>
+                  <span style="font-size: 8px;" class="ml-1 text-red-600 text-xs mx-auto text-center font-medium">(Must
+                    contain atleast 1 of Upper-Case, Lower-Case Letter, Number & Sepcial Charcter)
+                    <%= messages.password%>
+                  </span>
+                  <% } %>
+              </label>
+              <input id="password" name="password" type="password" autocomplete="current-password" required
+                class="appearance-non   relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                placeholder="Example: Jai@1105"><span onclick="myFunction()" class="eye  "><i
+                  class="fa fa-eye-low-vision"></i></span>
+            </div>
+
+
+            <div class="w-full lg:w-80 mt-4">
+              <label for="ConfirmedPass" class="block mb- text-sm font-semibold text-gray-500">
+                Confirm Password</label>
+              <input id="password2" name="password2" type="password" autocomplete="current-password" required
+                class="appearance-non   relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:z-10 sm:text-sm"
+                placeholder="Example: Jai@1105"><span onclick="myFunction2()" class="eye  "><i
+                  class="fa fa-eye-low-vision"></i></span>
+            </div>
+
+          </div>
+
+          <div class="space-x-0 lg:flex lg:space-x-4 my-2 mt-1">
+            <input required type="checkbox" name="tandcagree" id="tandcagree"> <div class="flex items-center justify-center"> <span class="ml-2 text-sm"> I agree with </span> &nbsp; <a class="text-xs" href="/privacy-policy" target="_blank" > Terms & conditions </a></div>
+          </div>
+
+
+          <div class="mt-3 flex justify-evenly">
+            <button class="button btn-navigate-form-step mr-3 px-3 py-2 btn-primary" type="button"
+              step_number="1">Back</button>
+            <div onclick="agreebtnajax()" class="button submit-btn ml-3 px-3 py-2">Submit</div>
+          </div>
+
+          <button type="submit" id="realButton" class="button submit-btn ml-3 px-3 py-2 hidden">Submit</button>
+
+        </section>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const navigateToFormStep = (stepNumber) => {
+    /**
+     * Hide all form steps.
+     */
+    document.querySelectorAll(".form-step").forEach((formStepElement) => {
+      formStepElement.classList.add("d-none");
+    });
+    /**
+     * Mark all form steps as unfinished.
+     */
+    document.querySelectorAll(".form-stepper-list").forEach((formStepHeader) => {
+      formStepHeader.classList.add("form-stepper-unfinished");
+      formStepHeader.classList.remove("form-stepper-active", "form-stepper-completed");
+    });
+    /**
+     * Show the current form step (as passed to the function).
+     */
+    document.querySelector("#step-" + stepNumber).classList.remove("d-none");
+    /**
+     * Select the form step circle (progress bar).
+     */
+    const formStepCircle = document.querySelector('li[step="' + stepNumber + '"]');
+    /**
+     * Mark the current form step as active.
+     */
+    formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-completed");
+    formStepCircle.classList.add("form-stepper-active");
+    /**
+     * Loop through each form step circles.
+     * This loop will continue up to the current step number.
+     * Example: If the current step is 3,
+     * then the loop will perform operations for step 1 and 2.
+     */
+    for (let index = 0; index < stepNumber; index++) {
+      /**
+       * Select the form step circle (progress bar).
+       */
+      const formStepCircle = document.querySelector('li[step="' + index + '"]');
+      /**
+       * Check if the element exist. If yes, then proceed.
+       */
+      if (formStepCircle) {
+        /**
+         * Mark the form step as completed.
+         */
+        formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-active");
+        formStepCircle.classList.add("form-stepper-completed");
+      }
+    }
+  };
+  /**
+   * Select all form navigation buttons, and loop through them.
+   */
+  document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
+    /**
+     * Add a click event listener to the button.
+     */
+    formNavigationBtn.addEventListener("click", () => {
+      /**
+       * Get the value of the step.
+       * 
+       */
+      const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+      /**
+       * Call the function to navigate to the target form step.
+       */
+      navigateToFormStep(stepNumber);
+    });
+  });
+
+  function myFunction() {
+    var x = document.getElementById("password");
+
+    if (x.type === 'password') {
+      x.type = "text";
+    }
+    else
+      x.type = "password";
+  }
+
+  function myFunction2() {
+    var x = document.getElementById("password2");
+
+    if (x.type === 'password') {
+      x.type = "text";
+    }
+    else
+      x.type = "password";
+  }
+
+  function agreebtnajax() {
+    console.log("sbcisbai")
+    if ($('#tandcagree').is(':checked')) {
+      console.log("tandcCheckBox")
+      document.getElementById("realButton").click()
+    }
+    else {
+      alert("You must agree with the terms and conditions of services.");
+      return false;
+    }
+  }
+
+
+  function callAjaxOtp() {
+    var email = $('#email').val();
+    var phone = $('#phone').val();
+
+    if (email && phone) {
+      if ($('#phone').val().length == 10) {
+        $.ajax({
+          url: "/send-otp-on-phone",
+          type: "POST",
+          data: {
+            phone: phone,
+            email: email
+          }
+        }).done(function (data) {
+          if (data.msg == "Success") {
+            document.getElementById("clickOk").click()
+            alert("Otp Send Successfully")
+          } else {
+            alert(data.msg)
+          }
+        })
+      } else {
+        alert("Enter 10 digit phone no.");
+      }
+    } else {
+      alert("Enter phone & email")
+    }
+  }
+
+</script>

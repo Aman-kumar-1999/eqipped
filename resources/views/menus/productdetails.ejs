@@ -1,0 +1,885 @@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- Facebook Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+     fbq('init', '192998336855239'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+     <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=192998336855239&ev=PageView
+    &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<style>
+    .container {
+
+        width: 100%;
+
+        margin: 0 auto;
+    }
+
+    .main .container .swiper-container .swiper-wrapper .swiper-slide .card-image img {
+        display: block;
+        position: relative;
+        left: 0;
+        bottom: 0;
+        height: auto;
+    }
+
+    .main .container .swiper-container .swiper-pagination-bullet {
+        opacity: 0.5;
+        background: white;
+        border: solid 1px black;
+        border-radius: 50%;
+    }
+
+    .main .container .swiper-container .swiper-pagination-bullet-active {
+        background: black;
+    }
+
+    .main .container .swiper-container .swiper-button-next,
+    .main .container .swiper-container .swiper-button-prev {
+        background-image: none;
+        background-size: 0;
+        background-repeat: no-repeat;
+        background-position: 0;
+        margin-top: -1rem;
+        
+    }
+
+    .main .container .swiper-container .swiper-button-next .arrow-icon,
+    .main .container .swiper-container .swiper-button-prev .arrow-icon {
+        font-size: 2rem;
+        color: white;
+        background-color: black;
+        border: solid 0.7px black;
+        border-radius: 50%;
+    }
+</style>
+<% include ('function'); %>
+    <%const string=JSON.stringify(product._id); let repeat=0; %>
+
+        <section id="shareproductModal"
+            class="fixed z-50  w-full h-full bg-slate-100 bg-opacity-50 hidden animate-in fade-in duration-300">
+            <div class="w-4/5 md:w-1/3   border inset-center ">
+                <div class="flex justify-end mr-3 mt-3">
+                    <iconify-icon onclick="clickCrossShare()" icon="akar-icons:cross" class="icon cursor-pointer">
+                    </iconify-icon>
+                </div>
+                <div class="ml-10 text-lg font-medium font-mono text-gray-700">
+                    <h1>Share</h1>
+                </div>
+                <div class="flex justify-center mt-5 px-3">
+
+                    <div class="text-center cursor-pointer mx-2 md:mx-8">
+                        <iconify-icon icon="logos:whatsapp-icon" class="icon-lg "></iconify-icon>
+                        Whatsapp
+                    </div>
+                    <div class="text-center cursor-pointer mx-2 md:mx-8">
+                        <iconify-icon icon="logos:google-gmail" class="icon-lg "></iconify-icon>
+                        Gmail
+                    </div>
+                    <div class="text-center cursor-pointer mx-2 md:mx-8">
+                        <iconify-icon icon="logos:telegram" class="icon-lg "></iconify-icon>
+                        Telegram
+                    </div>
+                    <div class="text-center cursor-pointer mx-2 md:mx-8">
+                        <iconify-icon icon="fa:facebook-square" class="icon-lg text-blue-600"></iconify-icon>
+                        Facebook
+                    </div>
+                    <div class="col-span-1"></div>
+                </div>
+                <div class="flex w-full justify-center bg-slate-400 py-1 px-3  my-8">
+                    <input id="copylink" type="text" class="w-full bg-slate-400  placeholder-white mx-0" placeholder="">
+                    <button class="bg-slate-400 mx-3 text-indigo-600" onclick="Copylinktoshare()">Copy</button>
+                </div>
+            </div>
+        </section>
+
+        <main class="my-8">
+            <div class="container mx-auto px-6">
+
+                <div class="md:flex">
+
+                    <!--                
+                    
+                        <div id="my-carousel" class="owl-carousel md:absolute">
+                        
+                            </div>
+                          
+                        
+                          </div> -->
+                    <div class="flex justify-center  md:w-1/3 p-2 ">
+                        <main class="main w-full">
+                            <div class="container w-full">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+
+
+                                        <% product.image.forEach((images)=> { %>
+                                            <div class="swiper-slide">
+                                                <div class="card-image">
+                                                    <img src="/img/<%= images.imgName %>" alt="<%= product.category %>">
+                                                </div>
+                                            </div>
+                                            <% }) %>
+
+                                    </div>
+                                    <!-- Add Pagination -->
+                                    <div class="swiper-pagination"></div>
+                                    <!-- Add Scrollbar -->
+                                    <div class="swiper-button-next">
+                                        <i class="fas fa-chevron-circle-right arrow-icon"></i>
+                                    </div>
+                                    <div class="swiper-button-prev">
+                                        <i class="fas fa-chevron-circle-left arrow-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                    <div class="w-full max-w-xl mx-auto mt-5 md:mt-0 md:w-1/2 p-2">
+                        <div class="grid grid-cols-6">
+                            <div class="col-span-5">
+                                <div class="flex justify-between relative">
+
+                                    <% if(product.variationname !='' && product.variationname !='undefined' &&
+                                        product.variationname !=null && product.piecePerPack> 1) { %>
+                                        <h3 style="font-family: ubuntu;"
+                                            class="text-black-700 font-semibold uppercase text-2xl">
+                                            <%= product.pname %> - <%= product.variationname %> (<%=
+                                                        product.piecePerPack %> Pcs)
+                                        </h3>
+                                        <% } else if(product.variationname !='' && product.variationname !='undefined'
+                                            && product.variationname !=null) {%>
+                                            <h3 style="font-family: ubuntu;"
+                                                class="text-black-700 font-semibold uppercase text-2xl">
+                                                <%= product.pname %> - <%= product.variationname %>
+                                            </h3>
+                                            <% } else { %>
+                                                <h3 style="font-family: ubuntu;"
+                                                    class="text-black-700 font-semibold uppercase text-2xl">
+                                                    <%= product.pname %>
+                                                </h3>
+                                                <% } %>
+
+                                                    <% if(user) {%>
+                                                        <div class=" right-0 ml-5 mr-2" id="saveforlaterDiv">
+                                                            <% user.saveForLater.forEach((item)=> { %>
+                                                                <% if(JSON.stringify(item)==JSON.stringify(product._id)){
+                                                                    %>
+                                                                    <a href="#" id="saveforlater">
+                                                                        <div
+                                                                            class="heartred h-10 w-10 grid content-center justify-center">
+                                                                            <svg class="h-5 " id="Layer_1"
+                                                                                data-name="Layer 1"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 122.88 107.39">
+                                                                                <defs>
+                                                                                    <style>
+                                                                                        .cls-1 {
+                                                                                            fill: white;
+                                                                                        }
+                                                                                    </style>
+                                                                                </defs>
+                                                                                <path class="cls-1"
+                                                                                    d="M60.83,17.18c8-8.35,13.62-15.57,26-17C110-2.46,131.27,21.26,119.57,44.61c-3.33,6.65-10.11,14.56-17.61,22.32-8.23,8.52-17.34,16.87-23.72,23.2l-17.4,17.26L46.46,93.55C29.16,76.89,1,55.92,0,29.94-.63,11.74,13.73.08,30.25.29c14.76.2,21,7.54,30.58,16.89Z" />
+                                                                            </svg>
+                                                                        </div>
+                                                                    </a>
+                                                                    <% } %>
+                                                                        <% }) %>
+                                                        </div>
+                                                        <% } %>
+                                </div>
+
+
+
+
+                                
+
+
+                                    <div class="py-2">
+                                        <span style="font-family: 'Roboto', sans-serif; font-weight: 500;"
+                                            class=" text-black-500  text-2xl ">₹ <%= parseFloat((product.price *
+                                                product.piecePerPack) - ((product.price *
+                                                product.piecePerPack)*(product.brand.discount)/100)).toFixed(2) %>
+                                        </span> / box
+                                        <span class="text-sm mx-2 text-gray-500 line-through">
+                                            ₹<%=product.price * product.piecePerPack %>
+                                        </span> <span class="text-sm text-lime-500 font-bold">
+                                            <%= product.brand.discount %>% off
+                                        </span>
+                                    </div>
+
+
+
+
+                                    <!-- <div><a href="/saveForLater/<%= product._id %>/<%= product._id %>/1">Add/Remove save for later</a></div> -->
+
+
+                                    <div class="mt-1 text-gray-700 text-sm  justify-between">
+                                        <span style="font-size: 10px;"> Piece per pack: <%= product.piecePerPack %>
+                                                pieces - ₹ <%= parseFloat((product.price) - ((product.price)*(product.brand.discount)/100)).toFixed(2) %> each</span>
+                                        <span class="flex items-center">
+                                            <%if(!product.reviews){%>
+                                                <span href="#" class="text-sm font-medium text-gray-900  ">0
+                                                    reviews</span>
+                                                <%}else{%>
+                                                    <p class=" mr-1 text-sm font-bold text-gray-900 ">
+                                                        <%= product.avgrating.toFixed(1)%>
+                                                    </p>
+                                                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                        </path>
+                                                    </svg>
+                                                    <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full "></span>
+                                                    <a href="#" class="text-sm font-medium text-gray-900 ">
+                                                        <%=product.reviews.length%> reviews
+                                                    </a>
+
+                                                    <%}%>
+                                        </span>
+                                    </div>
+
+
+
+
+                            </div>
+                            <div class="grid col-span-1  ">
+                                <button class="border h-10 w-10 rounded-full hover:bg-gray-100" onclick="shareLink()">
+                                    <iconify-icon icon="entypo:share" class="icon "></iconify-icon>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <hr class="my-3">
+
+
+                        <div class="mt-5">
+
+                            <div>
+                                <div style="display: flex;width: 100%;">
+                                    <span style="margin-right: 10px;">Brand:</span>
+                                    <a href="/allcategory/products?search=<%= product.brand.name %>">
+                                        <img src="/img/brands/<%= product.brand.image %>"
+                                            style="width: 100px; height: auto;" alt=""></a>
+                                </div>
+                            </div>
+
+                            <% if(product.description){ %>
+                                <div class="mt-5 text-gray-700 text-sm">Description:</div>
+                                <div class="mt-1 mb-4 text-gray-800 text-sm">
+                                    <%= product.description %>
+                                </div>
+                                <% } %>
+
+                                    <% if(product.variationname !='-' && product.variationname !='undefined' &&
+                                        product.variationname !=null) { %>
+                                        <div class="mt-5">
+                                            <label>
+                                                <%=product.variationLabel%>:
+                                            </label> <span class="text-gray-700 text-sm">
+                                                <%=product.variationname%>
+                                            </span>
+                                            <div class="flex justify-left flex-wrap items-left mt-1">
+                                                <% variants.forEach((variant)=> { %>
+                                                    <% if(JSON.stringify(product._id)==JSON.stringify(variant._id)){ %>
+                                                        <a
+                                                            href="/productDetails/<%= variant.pname %>/<%= variant._id %>/1"><button
+                                                                class="variantHover currentVariant border p-2 m-2 rounded text-sm">
+                                                                <%= variant.variationname %>
+                                                            </button></a>
+                                                        <% }else{ %>
+                                                            <a
+                                                                href="/productDetails/<%= variant.pname %>/<%= variant._id %>/1"><button
+                                                                    class="variantHover border p-2 m-2 rounded text-sm">
+                                                                    <%= variant.variationname %>
+                                                                </button></a>
+                                                            <% } %>
+                                                                <% }) %>
+                                            </div>
+                                        </div>
+                                        <% } %>
+
+                                            <div class="mt-3 text-gray-700 text-sm" for="">Piece per pack: <%=
+                                                    product.piecePerPack %> pieces<span style="font-size: 10px;"> - ₹
+                                                        <%= parseFloat((product.price) - ((product.price)*(product.brand.discount)/100)).toFixed(2) %> each
+                                                    </span>
+                                            </div>
+                        </div>
+
+                        <% if(user) { %>
+
+                            <div class="flex items-center mt-6 justify-center">
+                                <label class="text-gray-700 text-sm hidden" for="product-qty">Qty:</label>
+                                <input type="number" class="w-14 p-1 pl-2 mx-2 border rounded hidden" id="product-qty"
+                                    placeholder="1" value="1">
+                                <div id="buttonSection">
+                                    <% if(user.cart.length <=0){%>
+                                        <button id="add-cart-btn"
+                                            class=" flex-col mr-4 add-to-cart py-2 px-4 sm:px-8 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                            <span><svg class="h-4 w-4 float-left" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path
+                                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                            <span class="ml-3 sm:mx-4">Add to cart</span>
+                                        </button>
+                                        <%} else if(checkCart(user.cart, string)){ %>
+
+                                            <button id="add-cart-btn" onclick="location.href='/cart'"
+                                                class=" flex-col mr-4 add-to-cart py-2 px-4 sm:px-8 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                                <span><svg class="h-4 w-4 float-left" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                                        stroke="currentColor">
+                                                        <path
+                                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                                        </path>
+                                                    </svg>
+                                                </span>
+                                                <span class="ml-3 sm:mx-4">Go To Cart</span>
+                                            </button>
+                                            <%}else {%>
+                                                <button id="add-cart-btn"
+                                                    class=" flex-col mr-4 add-to-cart py-2 px-4 sm:px-8 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                                    <span><svg class="h-4 w-4 float-left" fill="none"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path
+                                                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
+                                                    <span class="ml-3 sm:mx-4">Add to cart</span>
+                                                </button>
+
+                                                <%}%>
+                                </div>
+
+                                <button id="buy-now-btn"
+                                    class="ml-4 flex-col buy-now py-2 sm:px-5 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                    <span></span>
+                                    <span class="mx-3 sm:mx-8">Buy Now</span>
+                                </button>
+
+
+                            </div>
+
+                            <% } else { %>
+
+                                <div class="flex justify-center w-full mt-10 pr-2" onclick="alertToLogIn()">
+                                    <button
+                                        class=" flex-col mr-4 add-to-cart py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                        <span><svg class="h-4 w-4 float-left" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path
+                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <span class="ml-3 sm:mx-4">Add to cart</span>
+                                    </button>
+
+                                    <button
+                                        class="ml-4 flex-col buy-now py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                                        <span></span>
+                                        <span class="mx-3 sm:mx-8">Buy Now</span>
+                                    </button>
+                                </div>
+
+                                <% } if(user){ for(var i=0 ; i < user.reviewed.length ; i++){ if(
+                                    JSON.stringify(user.reviewed[i].variantRatedID)===JSON.stringify(product._id)){ var
+                                    result=true; break; }; } if(!result){%>
+                                    <div class="shadow-sm my-10  rounded-lg border">
+                                        <form method="post" action="/review"
+                                            class="w-full max-w-xl pt-1 grid grid-cols-1 divide-y">
+                                            <div class="pl-3">
+                                                <h2 class=" pt-3 pb-2 text-gray-500 text-md">Rate the
+                                                    product</h2>
+                                            </div>
+
+                                            <div class="w-full md:w-full px-3 mb-2 py-3 grid grid-cols-4">
+                                                <div class="flex items-center col-span-4 sm:col-span-3">
+                                                    <input type="text" class="hidden" name="productID"
+                                                        value="<%=product._id%>">
+                                                    <input id="starRating" type="number" class="hidden" name="rating"
+                                                        value="">
+                                                    <svg id="star_1" value="1" aria-hidden="true"
+                                                        class="w-8 h-8  ratings_star ratings_vote" fill="currentColor"
+                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <title>Very Bad</title>
+                                                        <path
+                                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                        </path>
+                                                    </svg>
+                                                    <svg id="star_2" value="2" aria-hidden="true"
+                                                        class="w-8 h-8  ratings_star ratings_vote" fill="currentColor"
+                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <title>Bad</title>
+                                                        <path
+                                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                        </path>
+                                                    </svg>
+                                                    <svg id="star_3" value="3" aria-hidden="true"
+                                                        class="w-8 h-8  ratings_star ratings_vote" fill="currentColor"
+                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <title>Good</title>
+                                                        <path
+                                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                        </path>
+                                                    </svg>
+                                                    <svg id="star_4" value="4" aria-hidden="true"
+                                                        class="w-8 h-8  ratings_star ratings_vote" fill="currentColor"
+                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <title>Very Good</title>
+                                                        <path
+                                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                        </path>
+                                                    </svg>
+                                                    <svg id="star_5" value="5" aria-hidden="true"
+                                                        class="w-8 h-8  ratings_star ratings_vote" fill="currentColor"
+                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <title>Excellent</title>
+                                                        <path
+                                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                                        </path>
+                                                    </svg>
+                                                    <span id="ratingDesc" class="ml-3 font-semibold text-sm"></span>
+                                                </div>
+                                                <div class="flex items-center  mt-2 sm:mt-0 ">
+                                                    <div class="w-full px-3 ">
+                                                        <input type='submit'
+                                                            class=" bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
+                                                            value='Submit'>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                        </form>
+                                    </div>
+
+                                    <%}}%>
+                    </div>
+
+                    <div class="w-full max-w-md mx-auto mt-8 md:mt-0 md:w-1/5">
+
+
+                        <div class="w-full flex justify-center font-semibold border p-3 m-2 rounded bg-gray-100 cursor-pointer"
+                            title="100% Genuine Products">
+                            <div class="items-center flex"><i style="font-size: 28px;"
+                                    class="las la-certificate"></i><span></span><span
+                                    class="ml-1 text-md text-gray-700">100% Genuine Products</span></div>
+                        </div>
+                        <div class="w-full flex justify-center font-semibold border p-3 m-2 rounded bg-gray-100 cursor-pointer"
+                            title="Return Policy">
+                            <a href="/privacy-policy#shipping">
+                                <div class="items-center flex"><i style="font-size: 18px;"
+                                        class="fa-solid fa-arrow-rotate-left"></i><span></span><span
+                                        class="ml-2 text-md text-gray-700">Return Policy</span></div>
+                            </a>
+                        </div>
+                        <div class="w-full flex justify-center font-semibold border p-3 m-2 rounded bg-gray-100 cursor-pointer"
+                            title="Return Policy">
+                            <a href="/privacy-policy#shipping">
+                                <div class="items-center flex">
+                                    <i class="fa-solid fa-truck"></i>
+                                    <span class="ml-2 text-md text-gray-700">Cash On Delivery</span>
+                                </div>
+                            </a>
+                        </div>
+
+
+                        <% if(alsoSoldBy.length> 0){ %>
+                            <h3 style="font-family: ubuntu;" class="text-black-700 font-bold uppercase text-lg mb-4">
+                                Also Sold By</h3>
+                            <% alsoSoldBy.forEach((item)=> { %>
+                                <a href="/productDetails/<%= item.pname %>/<%= item._id %>/1">
+                                    <div class=" w-full flex border p-2 m-2 rounded">
+                                        <div class="w-1/3 h-full  md:h-2/2 ">
+                                            <img class="h-full w-full rounded-md object-contain max-w-lg mx-auto"
+                                                src="/img/<%= item.image %>" alt="<%= product.productCayegory %>">
+                                        </div>
+                                        <div class="w-2/3 h-full  md:h-2/2 px-2">
+                                            <h3 class="text-black-800 text-md ">
+                                                <%= item.vendor.fname %>
+                                            </h3>
+                                            <h3 class="text-black-800 text-md ">
+                                                <%= item.product.name %> - <%= item.name %>
+                                            </h3>
+                                            <div class="text-gray-400 text-sm my-1">Brand: <span
+                                                    class=" py-1 px- rounded uppercase text-xs">
+                                                    <%= item.brand.name %>
+                                                </span></div>
+                                            <span class="text-black-800 text-md">₹ <%= item.price %></span>
+                                        </div>
+
+                                    </div>
+                                </a>
+                                <% }) %>
+                                    <a href="/allcategory" class="text-sm float-right hover:underline SeeMore">See
+                                        more</a>
+                                    <% } %>
+                    </div>
+                </div>
+
+                <!-- <div class="mt-16">
+                    <h3 class="text-gray-600 text-2xl font-medium">Related Products</h3>
+                    <div class="">
+                        <div class="owl-carousel owl-carousel-big">
+                            <% suggested.forEach(function(suggested){ %>
+
+                                <div class="flex flex-col items-center gap-2 px-2 py-6  relative hover:shadow-lg">
+                                    <a href="/productDetails/<%= suggested.pname %>/<%= suggested._id %>/1"
+                                        class="flex flex-col items-center text-center group">
+                                        <div class="w-36 h-36">
+                                            <img draggable="false" class="w-full h-full object-contain"
+                                                src="/img/<%= product.image[0].imgName %>" />
+                                        </div>
+
+
+                                        <% if(suggested.variationname !='undefined' && suggested.variationname !=null) {
+                                            %>
+                                            <h2 class="text-sm mt-4 group-hover:text-blue-500">
+                                                <%= suggested.pname %> - <%= suggested.variationname %>
+                                            </h2>
+                                            <% } else { %>
+                                                <h2 class="text-sm mt-4 group-hover:text-blue-500">
+                                                    <%= suggested.pname %>
+                                                </h2>
+                                                <% } %>
+                                                    <span class="text-gray-400 text-xs ">Brand: <%= suggested.brand.name
+                                                            %></span>
+
+
+                                                    <div class="flex flex-col gap-2 items-center">
+
+                                                       
+                                                            <div class="flex items-center gap-1.5 text-md font-medium">
+                                                                <span>₹<%= Math.ceil((suggested.packPrice) -
+                                                                        ((suggested.packPrice)*(suggested.brand.discount)/100))
+                                                                        %></span>
+                                                                <span class="text-gray-500 line-through text-xs">₹
+                                                                    <%= Math.ceil(suggested.price *
+                                                                        suggested.piecePerPack) %>
+                                                                </span>
+                                                                <span class="text-xs font-medium text-lime-500">
+                                                                    <%= suggested.brand.discount %>%&nbsp;off
+                                                                </span>
+                                                            </div>
+                                                         
+
+                                                    </div>
+                                    </a>
+                                </div>
+
+                                <% }) %>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </main>
+        <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+        <script>
+
+            
+function india(aww) {
+          $('#searchProduct').val(aww);
+          document.getElementById("submitSearch").click()
+      }
+
+function sendData(e) {
+        const searchResults = document.getElementById('searchResults')
+        let match = e.value.match(/^[a-zA-Z ]*/);
+        let match2 = e.value.match(/\s*/);
+        if (match2[0] === e.value) {
+          searchResults.innerHTML = '';
+          return;
+        }
+        if (match[0] === e.value) {
+          fetch('getProductNamesForSearch', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ payload: e.value })
+          }).then(res => res.json()).then(data => {
+            let payload = data.payload;
+            searchResults.innerHTML = '';
+            if (payload.length < 1) {
+              searchResults.innerHTML = '<p>Sorry, Nothing Found.</p>';
+              return;
+            }
+            payload.forEach((item, index) => {
+              if (index > 0) searchResults.innerHTML += '<hr>';
+              searchResults.innerHTML += `<div onclick="india('${item.pname}')" class="flex px-2 cursor-pointer items-center w-28"> <img class="h-10 py-1 object-contain"
+                            src="/img/${ item.image[0].imgName}" alt="${item.pname}" />
+                             <span class="p-2 px-4 text-xs">${item.pname}</span></div>`
+            });
+          });
+          return;
+        }
+        searchResults.innerHTML = '';
+      }
+
+
+      
+            $(document).ready(function () {
+
+                $('#my-carousel').on('initialized.owl.carousel', function () {
+                    $('.navigator').eq(0).addClass('active');
+                    console.log('initialized');
+                });
+
+                $('#my-carousel').owlCarousel({
+                    loop: true,
+                    autoplay: false,
+                    autoplayTimeout: 3000,
+                    nav: true,
+                    navText: ['<svg  viewBox="0 0 11 20"><path style="fill:none;stroke-width: 2px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>', '<svg viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 2px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'],
+                    singleItem: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 1
+                        },
+                        1000: {
+                            items: 1
+                        }
+                    }
+                });
+
+                $('#my-carousel').on('changed.owl.carousel', function (ev) {
+                    var item_index = ev.page.index;
+                    $('.navigator').removeClass('active').eq(item_index).addClass('active');
+                });
+
+                $('.navigator').on('click', function () {
+                    var item_no = $(this).data('item');
+                    $('#my-carousel').trigger('to.owl.carousel', [item_no, 1000, true]);
+                });
+            });
+            var swiper = new Swiper(".swiper-container", {
+                slidesPerView: 1,
+                spaceBetween: 7,
+                centeredSlides: true,
+                freeMode: true,
+                grabCursor: true,
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true
+                },
+                autoplay: false,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev"
+                },
+                breakpoints: {
+                    500: {
+                        slidesPerView: 1
+                    },
+                    700: {
+                        slidesPerView: 1
+                    }
+                }
+            });
+
+
+            // function heartClicked(){
+            //     document.body.classList.toggle('heartliked');
+            //     setTimeout(() => {
+            //     alert("Product added to your wishlist");
+
+            //     }, 400);
+            // }
+            var copyText = window.location.href;
+            $('#copylink').attr('value', copyText);
+            function shareLink() {
+                $('#shareproductModal').removeClass('hidden');
+            }
+
+            $('.ratings_star').hover(
+
+                function () {
+                    $(this).addClass('ratings_over');
+                    $(this).prevAll().addClass('ratings_over');
+
+                },
+
+                function () {
+                    $(this).removeClass('ratings_over');
+                    $(this).prevAll().removeClass('ratings_over');
+
+                }
+            );
+            $('.ratings_star').click(function () {
+                $(this).addClass('ratings_clicked');
+                $(this).prevAll().addClass('ratings_clicked');
+                $(this).nextAll().removeClass('ratings_clicked');
+                var stars = this.id.replace('star_', '');
+                $('#starRating').val(stars);
+
+                switch (this.id) {
+                    case 'star_1':
+                        $('#ratingDesc').html('<span class="text-red-500">Very Bad</span>');
+                        break;
+                    case 'star_2':
+                        $('#ratingDesc').html('<span class="text-red-400">Bad</span>');
+                        break;
+                    case 'star_3':
+                        $('#ratingDesc').html('<span class="text-green-400">Good</span>');
+                        break;
+                    case 'star_4':
+                        $('#ratingDesc').html('<span class="text-green-500">Very Good</span>');
+                        break;
+                    case 'star_5':
+                        $('#ratingDesc').html('<span class="text-green-600">Excellent</span>');
+                        break;
+                }
+            });
+            function Copylinktoshare() {
+                navigator.clipboard.writeText(copyText);
+                alert("Link Copied");
+            }
+            function clickCrossShare() {
+                $('#shareproductModal').addClass('hidden');
+            }
+
+            function alertToLogIn() {
+
+                swal({
+                    title: "Register/Login",
+                    text: "Authorize user have permission to place order.",
+                    buttons: {
+                        Register: {
+                            text: "Register",
+                            value: "/register",
+                            className: "swal-icon5",
+                        },
+                        Login: {
+                            text: "Login",
+                            value: "/login",
+                            className: "swal-icon5",
+                            html: true
+                        },
+                        Login1: {
+                            text: "Hidden Button",
+                            className: "swal-icon1",
+                        },
+                    },
+                    icon: "info",
+                }).then(function (value) {
+                    if (value == "login") {
+                        window.location = value;
+                    } else {
+                        window.location = value;
+                    }
+                });
+            }
+
+
+            $('#add-cart-btn').click(function () {
+                var params = {
+                    pid: '<%= product._id %>',
+                    qty: $('#product-qty').val(),
+                    total: '<%= product.price %>',
+                    vendor: '<%= product.vendor %>'
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/update-cart',
+                    data: params,
+                    dataType: 'json',
+                    encode: true
+                }).done(function (result) {
+                    if (result.status == "success") {
+
+                        $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
+
+
+                        swal({
+                            title: 'Product added to cart',
+                            text: 'Ready to checkout',
+                            icon: 'success',
+                            timer: 2000,
+                            buttons: false,
+                        })
+
+
+
+                        $("#buttonSection").load(window.location.href + " #buttonSection");
+                    }
+                })
+            })
+            $('#saveforlater').click(function () {
+                var params = {
+                    vid: '<%= product._id %>',
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/saveForLater',
+                    data: params,
+                    dataType: 'json',
+                    encode: true
+                }).done(function (result) {
+                    if (result.status == "success") {
+                        alert("Done")
+                    }
+                })
+            })
+            $('#buy-now-btn').click(function () {
+                var params = {
+                    pid: '<%= product._id %>',
+                    qty: $('#product-qty').val(),
+                    total: '<%= product.price %>',
+                    vendor: '<%= product.vendor %>'
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/update-cart',
+                    data: params,
+                    dataType: 'json',
+                    encode: true,
+                }).done(function (result) {
+                    if (result.status == "success") {
+                        $('#cartcount').html('<super><span id = "cartcount"><i class = "fa fa-circle" style= "font-size: 10px;color: orange"></i></span></super>');
+
+                    }
+                })
+                var url = '/customer/checkout';
+                document.write("");
+                setTimeout(function () { window.location = url; }, 500);
+
+            })
+
+
+        </script>
+
+        <!-- bkasjbskfbsf -->

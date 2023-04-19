@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="31.98" height="31.98" viewBox="0 0 600 600">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fe5f1e;
+      }
+
+      .cls-2 {
+        font-size: 300px;
+        fill: #fff;
+        font-family: "Bookman Old Style";
+      }
+    </style>
+  </defs>
+  <rect id="Rounded_Rectangle_4" data-name="Rounded Rectangle 4" class="cls-1" width="599" height="599" rx="150" ry="150"/>
+  <text id="ε" class="cls-2" transform="translate(132.583 471.401) scale(2.529 2.384)">ε</text>
+</svg>

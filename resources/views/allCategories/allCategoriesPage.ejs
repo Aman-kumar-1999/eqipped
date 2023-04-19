@@ -1,0 +1,73 @@
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<!-- Facebook Pixel Code -->
+<script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+     fbq('init', '192998336855239'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+     <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=192998336855239&ev=PageView
+    &noscript=1"/>
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+<h1 class="heading">Categories</h1>
+<section class="container mx-auto p-4 sm:p-8 grid grid-cols-2 sm:grid-cols-5 sm:gap-2 justify-around">
+    <% nashta.forEach(function(nashta){ %>
+        <a href="/Category/<%= nashta.pcategory%>/<%= nashta._id%>/1">
+            <div class="flex flex-col h-min w-40 p-1 border-box bg-white rounded sm:m-5 cursor-pointer">
+                <lottie-player src="<%= nashta.pimage %>"  background="transparent"  speed="1"  style="width: 150px; height: 150px;"  loop  autoplay></lottie-player>
+                <div class="flex border-box p-1 flex-col">
+                    <div class="text-center">
+                        <%= nashta.pcategory %>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <% }) %>
+
+</section>
+
+
+
+<h1 class="heading ">Trusted Brands</h1>
+
+<section class="container mx-auto mb-14  flex flex-wrap justify-around">
+    <div style="justify-content: left; align-items: center;"
+        class="flex flex-col h-24 w-36 border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg ">
+
+        <img src="/img/brands/thermofisher.webp" alt="" srcset=""></a>
+    </div>
+
+    <div style="justify-content: center; align-items: center;"
+        class="flex flex-col h-24 w-36  border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
+        <img src="/img/brands/remi.webp" alt="" srcset="">
+    </div>
+
+    <div style="justify-content: center; align-items: center;"
+        class="flex flex-col h-24 w-36  border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
+        <img src="/img/brands/polylab.webp" alt="" srcset="">
+    </div>
+
+    <div style="justify-content: center; align-items: center;"
+        class="flex flex-col h-24 w-36 border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
+        <img src="/img/brands/borosil.webp" alt="" srcset="">
+    </div>
+
+    <div style="justify-content: center; align-items: center;"
+        class="flex flex-col h-24 w-36 border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
+        <img src="/img/brands/tarson.webp" alt="" srcset="">
+    </div>
+
+    <div style="justify-content: center; align-items: center;"
+        class="flex flex-col h-24 w-36  border-box bg-white rounded xl p-3 m-3 shadow-md hover:shadow-lg">
+        <img src="/img/brands/merck.svg" alt="" srcset="">
+    </div>
+</section>

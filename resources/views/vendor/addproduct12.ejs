@@ -1,0 +1,289 @@
+<section class="logi min-h-full"  >
+
+
+
+  
+        <h2 class="m-10 text-center text-3xl font-extrabold text-gray-900 " >
+         List Your Products
+        </h2>
+      
+
+    <section class="container flex mx-auto py-8 px-10">
+        <div class="flex w-full">
+            <div style="width: 45rem; background-color: white;" class="w-full form-step" >
+                <form class="flex justify-center w-full mx-auto" action="addproduct" method="post"
+                    enctype="multipart/form-data">
+
+                    <div class=" w-full">
+                        <div class="flex mx-auto">
+                            
+                        <% if(messages.error) { %>
+                            <span class="text-red-600 text-xs mx-auto text-center font-medium">
+                                <%= messages.error%>
+                            </span>
+                        <% } %>
+
+                        </div>
+
+
+                                <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="name" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Product Name</label>
+                                        <input name="name" type="text" required placeholder="Product name..." id="name"
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label class="block mb-3 text-sm font-semibold text-gray-500"
+                                            for="categoryName">Category Name</label>
+                                        <select name="categoryName" id="category-dropdown" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                            <option value="">select</option>
+                                            <% categories.forEach((category) => { %>
+                                                <option value="<%= category._id %>"><%= category.pcategory %></option>
+                                            <% }) %> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+
+                                    <div class="mt-4">
+                                        <label for="image" class="block mb-3 text-sm font-semibold text-gray-500">Upload
+                                            Image</label>
+                                        <input id="image" name="image" type="file" required
+                                            class="w-full px-5 py-1 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="brand" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Brand Name</label>
+                                            <select name="brand" id="brand-dropdown" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option value="">select</option>
+                                                <% brands.forEach((brand) => { %>
+                                                    <option value="<%= brand._id %>"><%= brand.name %></option>
+                                                <% }) %> 
+                                            </select>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="price" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Price</label>
+                                        <input name="price" type="text" required placeholder="price" id="price"
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="size" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Dimention</label>
+                                        <input name="size" type="text" required placeholder="size" id="size"
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                </div> -->
+                          
+
+                                <!-- <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="piecePerPack"
+                                            class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Piece Per Pack</label>
+                                        <input name="piecePerPack" type="text"  placeholder="Piece per pack"
+                                            id="piecePerPack"
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="netQuantity" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Net Quantity</label>
+                                        <input name="netQuantity" type="text" placeholder="Net quantity"
+                                            id="netQuantity"
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                </div> -->
+                                <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="HSN" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            HSN Number </label>
+                                        <input name="HSN" type="number" required placeholder="HSN NO."
+                                            id="HSN"
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="GST" class="block mb-3 text-sm font-semibold text-gray-500">
+                                           G.S.T Slab of this Product</label>
+                                        <input name="GST" type="text" required placeholder="GST %"
+                                            id="GST"
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                </div>
+                                <!-- <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="itemWeight" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Item Weight</label>
+                                        <input name="itemWeight" type="text" required placeholder="Item Weight"
+                                            id="Item Weight"
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="subCategory" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            SubCategory</label>
+                                       
+                                            <select name = "subCategory" id = "subcategory-dropdown" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <option>Select Subcategory</option>
+                                            </select> 
+                                        </div>
+                                </div> -->
+
+
+
+                                <!-- --------------------------  LIQUID  ------------------------ -->
+
+
+
+
+                                <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+
+                                    <div class="w-full lg:w-80 mt-4">
+                                        <label for="containedLiquid"
+                                            class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Contained Liquid</label>
+                                        <div
+                                            class="flex justify-around align-center block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                            <span class="volumeSwitch"><span class="mr-1">Yes</span><input type="radio"
+                                                    id="containedLiquid" name="containedLiquid" value="Yes"></span>
+                                            <span class="volumeSwitchOff"><span class="mr-1">No</span><input
+                                                    type="radio" id="containedLiquid" name="containedLiquid" checked="checked"
+                                                    value="No"></span>
+                                        </div>
+                                    </div>
+                                    <div id="volSwitch" class="w-full lg:w-80 mt-4">
+
+                                    </div>
+                                </div>
+                              <!--   <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                                    <div class="w-full  lg:w-12/12 mt-4">
+                                        <label for="description" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Description</label>
+                                        <input name="description" type="text" required placeholder="Description"
+                                            id="description"
+                                            class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600">
+                                    </div>
+                                   
+                                </div> -->
+
+
+
+<!-- VARIATION DISCLAIMER -->
+
+
+
+
+                                <!-- <div class="space-x-0 lg:flex lg:space-x-4 my-4 ">
+                                    <div class="w-full  lg:w-12/12 m-4 text-center">
+                                    variations lorem ipsum
+                                    <br/>
+                                    minumum no. of variation : 1<br/> eg:- you have 2 beakers of volume 50ml & 100ml hence,<br/> product is beaker , variation name is volume , and variation number is 2. 
+                                        </div>
+                                </div> -->
+                                
+
+                                
+                                <div class="space-x-0 lg:flex lg:space-x-4 mt-4">
+                                <div class = "w-1/2">
+                                    <label for="variationName" class="block mb-3 text-sm font-semibold text-gray-500">
+                                        Variation Name</label>
+                                    <input  class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" id="variationName" type="text" name="variationname" placeholder = "Eg: color, volume, weight etc.">
+                                </div>
+                                    <div class = "w-1/2">
+                                        <label for="my_input" class="block mb-3 text-sm font-semibold text-gray-500">
+                                            Variation Quantity</label>
+                                    <input  class="w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" id="my_input" name="test1" type="number" placeholder="Enter number of variants" value="">
+
+                                    <button  data-toggle="modal" data-target="#myModal" onclick="add_inputs()" id="add_input1" name="" class="border px-1 bg-gray-200 my-2 rounded float-right" type="button">create variations</button>
+
+                                </div>
+                                </div>
+                            
+                                <div class="space-x-0 lg:flex lg:space-x-4 mt-4 justify-center">
+                                
+                                    <div id="rolonum">
+
+                                    </div>    
+                                </div>
+                                <div class="flex justify-center mt-10">
+                                    <button type="submit"
+                                        class="button btn-navigate-form-step group relative w-full flex justify-center py-2 px-4  border border-transparent text-sm font-medium rounded-md text-white btn-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Upload
+                                    </button>
+                                </div>
+                           
+                    </div>
+
+                </form>
+            </div>
+
+            <div style="width: 45rem;" class="w-full hidden  lg:none xl:block">
+                <img class="opacity-75 min-w-md" 
+                    src="/img/addproduct.png" alt="" srcset="">
+            </div>
+
+        </div>
+
+    </section>
+
+
+</section>
+
+<script >
+        let vol1 = document.querySelector('.volumeSwitch')
+    let vol2 = document.querySelector('.volumeSwitchOff')
+
+    vol1.addEventListener("click", switchOn);
+    vol2.addEventListener("click", switchOff);
+    var sizePlaceholder = "Enter Size";
+    function switchOn() {
+        sizePlaceholder = "Enter Volume";
+        $("#rolonum").load(location.href + " #rolonum");
+    }
+
+    function switchOff() {
+        sizePlaceholder = "Enter Size";
+        $("#rolonum").load(location.href + " #rolonum");
+    }
+    $(document).ready(function() {
+    $('#category-dropdown').on('change', function() {
+    var category_id = this.value;
+    $("#subcategory-dropdown").html('');
+    $.ajax({
+    url: "/fetch/subcat/",
+    type: "POST",
+    data: {
+    category_id: category_id,
+    },
+    dataType: 'json',
+    success: function(result) {
+    $("#subcategory-dropdown").append('<option value="">Select Subcategory</option>');
+    $.each(result.subcats, function(key, value) {
+        $("#subcategory-dropdown").append('<option value="' + value._id + '">' + value.name + '</option>');
+    });
+    }
+    });
+    });
+    });
+    function add_inputs() {
+    n = $('#my_input').val();
+    $("#rolonum").html('');
+    for (var i = 1; i <= n; i++) {
+      $("#rolonum").append('<span>Variant ' + i + ' </span><br/><input id="rolo_code' + i +
+       '" name="vcodes" placeholder = "Enter Code" type="text" class="my-1 w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" value="" required/> <input id="rolo_add' + i + 
+       '" name="variant" placeholder = "' + sizePlaceholder+'"  type="text" class="my-1 w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" value="" required/> <input id="rolo_price' + i + 
+       '" name="prices" placeholder = "Enter Price"  type="number" step=".0001" value="" class="my-1 w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" required/><input id="rolo_add' + i + 
+       '" name="descriptions" placeholder = " Enter Description ( optional )"  type="text" class="my-1 w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" value="" /> <input id="rolo_price' + i + 
+       '" name="piecePerPacks" placeholder = "Piece per pack ( eg:- 12, 2, etc. )"  type="number" value="" class="my-1 w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" required/><input id="rolo_price' + i + 
+       '" name="itemWeights" placeholder = "Weight ( per pack ) (optional)"  type="number" value="" class="my-1 w-full px-2 py-2 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" /><br><br>');
+      
+    }
+
+  }
+</script>

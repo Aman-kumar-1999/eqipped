@@ -1,0 +1,33 @@
+<div class="my-10">
+    <% if(user.saveForLater.length > 0){ %>
+        <% user.saveForLater.forEach((product)=> { %>
+            <div class="mx-20 flex items-center " style="border: 2px solid black; justify-content: space-around;">
+                <a href="http://"> <span>ProductName: <%= product.pname %> <%= product.name %></span> </a>
+                <span class="">Price: <%= product.price %></span> <span class=""> PiecePerPack:
+                    <%= product.piecePerPack %></span> <button id="buy-now-btn"
+                    class="ml-4 flex-col buy-now py-2 px-4 bg-white-600 text-white text-sm font-medium rounded hover:bg-white-500 focus:outline-none focus:bg-white-500">
+                    <span></span>
+                    <span class="mx-6">Buy Now</span>
+                </button></div> <br>
+            <% }) %>
+    <% }else{ %>
+        <section class="cart py-1 min-h-5/6 " style="background-color: white;  ">
+            <div class=" py-8">
+                <div class=" container mx-auto text-center">
+                    <h1 class="text-3xl font-bold mb-2">Favourites Empty 😕</h1>
+                    <p class="text-gray-500 text-md">You probably haven't favourited anything yet. <br>
+                        To order your requirement, go to the main page.</p>
+
+                    <div class="" style = "margin-top: 20px;">
+                        <a href="/allcategory"><button
+                                class="h-12 w-56 bg-blue-500 rounded focus:outline-none text-white ">Continue
+                                Shopping</button></a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    <% } %>
+</div>
+
+

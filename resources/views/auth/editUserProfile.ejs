@@ -1,0 +1,194 @@
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '192998336855239'); 
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+   <img height="1" width="1" 
+  src="https://www.facebook.com/tr?id=192998336855239&ev=PageView
+  &noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+<section class="min-h-full flex justify-center bg-gray-200">
+  <div class="container contain  py-6 px-6 ">
+    <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+      <div class="xl:w-10/12">
+        <div class="block bg-white shadow-lg rounded-lg">
+          <div class="lg:flex lg:flex-wrap g-0">
+            <div class="lg:w-6/12 px-4 md:px-0">
+              <div class="md:p-12 md:mx-6">
+                <div class="text-center">
+                  <h4 style="background-image: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;" class="text-xl font-semibold mt-1  pb-4">Edit profile</h4>
+                </div>
+
+                <% if(messages.error) { %>
+                  <span class="text-red-600 text-sm mx-auto text-center font-medium">
+                    <%= messages.error %>
+                  </span>
+                  <% } %>
+
+
+
+                    <form action="/editUserProfile" method="post">
+
+
+                      <div class="mb-4">
+                        <label for="name" class="pl-1 text-xs text-gray-400">Name</label>
+                        <input readonly type="text"
+                          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="emob" value="<%= user.fname + '' + user.lname %>" placeholder="Name" />
+                      </div>
+
+                      <div class="mb-4">
+                        <label for="emob" class="pl-1 text-xs text-gray-400">Phone</label>
+                        <input readonly type="text" name="phone"
+                          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="emob" value="<%= user.phone%>" placeholder="Phone" />
+                      </div>
+
+                      <div class="mb-4">
+                        <label for="email" class="pl-1 text-xs text-gray-400">Email</label>
+                        <input readonly type="email" name="email"
+                          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="email" value="<%= user.email%>" placeholder="Email" />
+                      </div>
+
+                      <div class="mb-4">
+                        <label for="iname" class="pl-1 text-xs text-gray-400">Institution Name</label>
+                        <input type="text" name="institutionName"
+                          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="iname" value="<%= user.institutionName%>" placeholder="Institution Name" />
+                      </div>
+
+                      <input type="hidden" name="id" value="<%= user.id%>"> <span></span>
+
+                      <div class="mb-4">
+                        <label for="desig" class="pl-1 text-xs text-gray-400">Designation</label>
+                        <input type="text" name="designation"
+                          class="form-control block w-full px-2 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="desig" value="<%= user.designation %>" placeholder="Designation" />
+                      </div>
+                      <div class="mb-4">
+                        <label for="address" class="pl-1 text-xs text-gray-400">Address</label>
+                        <input type="text" name="address" readonly value="<%= user.address %>"
+                          class="form-control h-12 block w-full px-2 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          id="address" placeholder="Address" />
+                      </div>
+                      <div class="text-center pt-1 mb-6 pb-1">
+                        <button
+                          class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                          type="submit" data-mdb-ripple="true" data-mdb-ripple-color="light" style="
+                        background: linear-gradient(
+                          to right,
+                          #ee7724,
+                          #d8363a,
+                          #dd3675,
+                          #b44593
+                        );
+                      ">
+                          Save & Continue
+                        </button>
+
+                      </div>
+
+                    </form>
+              </div>
+            </div>
+            <div
+              class="lg:w-6/12 flex flex-col justify-center items-center w-full lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
+              style="
+                background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+              ">
+              <div class="text-white px-4 py-6 md:p-12 md:mx-6 w-full ">
+                <h4 class="text-xl  font-semibold mb-6">Profile Photo</h4>
+                <div class="mb-4 w-full flex justify-center">
+
+                  <!-- <img id="userAvatar" src="/img/melchor.webp" class="w-20 md:w-full h-auto rounded-full" alt="" /> -->
+                  <img id="userAvatar" src="<%= data.avatar %>" class="w-20 md:w-1/2 h-auto rounded-full" alt="" />
+
+                </div>
+                <div class="flex justify-center items-center w-full">
+                  <button id="showAvatar"
+                    class="bg-white  h-8 md:h-10 hover:bg-gray-100 text-gray-800 font-semibold px-4 sm:px-6 border border-gray-400 rounded shadow">
+                    Edit
+                  </button>
+                </div>
+
+              </div>
+              <div class="flex justify-around items-center w-full">
+                <img id="selectAvatar" src="" class="w-20 h-auto rounded-full cursor-pointer" alt="" />
+                <img id="selectAvatar1" src="" class="w-20 h-auto rounded-full cursor-pointer" alt="" />
+                <img id="selectAvatar2" src="" class="w-20 h-auto rounded-full cursor-pointer" alt="" />
+                <img id="selectAvatar3" src="" class="w-20 h-auto rounded-full cursor-pointer" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  $(document).ready(function () {
+    $("#showAvatar").click(function () {
+      $("#selectAvatar").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa69_HGc_i3MXKCPZzCfAjBZC4bXJsn0rS0Ufe6H-ctZz5FbIVaPkd1jCPTpKwPruIT3Q&usqp=CAU");
+      $("#selectAvatar1").attr("src", "https://thumbs.dreamstime.com/b/male-avatar-icon-flat-style-male-user-icon-cartoon-man-avatar-hipster-vector-stock-91462914.jpg");
+      $("#selectAvatar2").attr("src", "https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png");
+      $("#selectAvatar3").attr("src", "https://img.freepik.com/premium-vector/female-user-profile-avatar-is-woman-character-screen-saver-with-emotions_505620-617.jpg");
+    });
+
+    $("#selectAvatar").click(function () {
+      $imgsrc = $("#selectAvatar").attr('src');
+      callAjaxAvatar($imgsrc);
+    });
+    $("#selectAvatar1").click(function () {
+      $imgsrc = $("#selectAvatar1").attr('src');
+      callAjaxAvatar($imgsrc);
+    });
+    $("#selectAvatar2").click(function () {
+      $imgsrc = $("#selectAvatar2").attr('src');
+      callAjaxAvatar($imgsrc);
+    });
+    $("#selectAvatar3").click(function () {
+      $imgsrc = $("#selectAvatar3").attr('src');
+      callAjaxAvatar($imgsrc);
+    });
+
+  });
+
+  function callAjaxAvatar(avatar) {
+    console.log(avatar)
+    if (avatar) {
+      $.ajax({
+        url: "/editUserProfile",
+        type: "POST",
+        data: {
+          avatar: avatar
+        }
+      }).done(function (data) {
+        if (data.msg == "Success") {
+          location.reload();
+        } else {
+          alert(data.msg)
+        }
+      })
+    } else {
+      alert("Something went wrong");
+    }
+  }
+
+</script>

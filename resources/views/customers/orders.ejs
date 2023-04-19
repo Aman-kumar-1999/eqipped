@@ -1,0 +1,141 @@
+
+
+<section class="orders light-section min-h-full">
+    <div class="container mx-auto px-20 pt-12">
+        <h1 class="font-bold text-lg mb-4">All orders</h1>
+        
+
+
+
+        <% if(messages.success) { %>
+            <div id="success-alert" class="flex items-center bg-green-500 text-white text-sm font-bold px-4 py-3"
+                role="alert">
+                <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path
+                        d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z" />
+                </svg>
+                <p>
+                    <%= messages.success %>
+                </p>
+            </div>
+            <% } %>
+                <table class="min-w-full">
+                    <thead class="bg-white border-b">
+                        <tr>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Order</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Products</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Amount</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Date</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Status</th>
+                            <th scope="col" class="text-sm font-semibold text-gray-900 px-6 py-4 text-left">Cancel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <% if(orders.length) { %>
+                                <% orders.forEach((item)=> { %>
+                                    <% item.orders.forEach((order, index) => { %>
+                                      
+                                        <tr class="h-12 border">
+                                            <% if(index == 0){ %>
+                                                <td class = "text-center border" rowspan="<%= item.orders.length %>">
+                                                    <%= item.orderID %>
+                                                </td>
+                                            <% } %>
+                                            <td class="  px-4 py-2  content-center ">
+                                                <img class="h-16 w-16" src="/img/<%= order.items.product.image[0].imgName %>" alt="product image" >
+                                                
+                                                <%= order.items.product.pname %>-
+                                                <%= order.items.product.variationname %>
+
+                                                <a class="link  group" href="/customer/orders/<%= order._id %>">
+                                                <i style=" margin-left: 30px;" class="group-hover:text-blue-500 underline">check status</i>
+                                                </a>
+                                            </td>
+                                            <% if(index == 0){ %>
+                                                <td class=" px-4 py-2" rowspan="<%= item.orders.length %>">
+                                                    <span>Paid</span>     ₹ <%= order.txnAmount %> <br>
+                                                    
+                                                    <% if(order.remainingAmount != "Completed") {%>
+                                                    <span>Remaining</span>    ₹ <%= order.remainingAmount %>                                    
+                                                    <% } %>
+                
+                                                    </td>
+                                            <% } %>
+                                            <td class=" px-4 py-2">
+                                                <%= moment(order.createdAt).add(5, 'hours').add(30, 'minutes').format("hh:mm:ss a") +"  :  " + moment(order.createdAt).format('DD-MM-YYYY') %>
+                                            </td>
+
+                                            <% if(order.vendorStatus == 'declined'){ %>
+                                                <td id="OrderStatusID" colspan = "2" class=" text-center bg-red-500 text-white">
+                                                    Declined by Vendor
+                                                </td>
+                                            <% }else{ %>
+                                                <% if(order.status == 'order_placed') { %>
+                                                    <td id="OrderStatusID" class="text-center bg-white text-black">
+                                                        <%= order.status%>
+                                                    </td> 
+                                                <% } else if(order.status == 'prepared') { %>
+                                                    <td id="OrderStatusID" class="text-center bg-yellow-200 text-black">
+                                                        <%= order.status%>
+                                                    </td> 
+                                                <% } else if(order.status == 'confirmed') { %>
+                                                    <td id="OrderStatusID" class="text-center bg-yellow-200 text-black">
+                                                        <%= order.status%>
+                                                    </td>
+                                                <% } else if(order.status == 'cancelled') { %>
+                                                    <td id="OrderStatusID" colspan = "2" class=" text-center bg-red-500 text-white">
+                                                        <%= order.status%>
+                                                    </td>
+                                                <% } else if(order.status == 'delivered') { %>
+                                                    <td id="OrderStatusID" class="text-center bg-blue-500 text-white">
+                                                        <%= order.status%>
+                                                    </td>
+                                                <% } else if(order.status == 'completed') { %>
+                                                    <td id="OrderStatusID" class="text-center bg-green-500 text-white">
+                                                        <%= order.status%>
+                                                    </td>
+                                                <% }  %>
+                                            <% } %>
+
+                                            <% if(order.status == "order_placed" || order.status == "prepared" ||order.status == "confirmed" ){ %>
+                                            <td class=" px-4 py-2">
+                                                <button  style = "background: red; color: #fff; padding: 0 10px; font-weight: 500" onclick = "cancelOrder('<%= order._id %>')" >Cancel</button>
+                                            </td>
+                                            <% } %>
+                                        </tr>
+                                    <% }) %>
+                                <% }) %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td class="p-4"><span>No orders found!</span></td>
+                                        </tr>
+                                        <% } %>
+                    </tbody>
+                </table>
+    </div>
+    <div class="flex justify-center py-28">
+        <a href="/"><button class="h-12 w-48 bg-blue-500 rounded focus:outline-none text-white  ">Continue Shopping</button></a>
+    </div>  
+</section>
+
+<script>
+    function cancelOrder(id){
+        console.log(id);
+        var params = {
+            oid: id,
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/cancel-order',
+            data: params,
+            dataType: 'text',
+            encode: true
+        }).done(function (result) {
+            if (result.status == "success") {
+                
+            }location.reload();
+            
+        })
+    }
+</script>

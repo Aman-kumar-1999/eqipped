@@ -1,0 +1,39 @@
+
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 col-gap-12 min-h-full row-gap-16">
+    <% products.forEach(function(product){ %>
+        <div class="w-full md:w-72 mb-8 mx-auto border-gray-200 border">
+            <a href="/productDetails/<%= product.pname %>/<%= product._id %>/1">
+                <img class="h-40 mb-4 mx-auto" src="/img/<%= product.image %>" alt="">
+                <div class="text-center">
+                    <h2 class="mb-2 text-lg">
+                        <%= product.pname %> - <%= product.variationname %>
+                    </h2>
+                    <div>Brand: <span class="size py-1 px-4 rounded-full uppercase text-xs">
+                            <%= product.brand.name %>
+                        </span></div>
+                        <div class="gap-1.5 text-md font-medium">
+                            <span>₹<%= Math.ceil((product.packPrice) - ((product.packPrice)*(product.brand.discount)/100)) %></span>
+                            <span class="text-gray-500 line-through text-xs">₹<%= product.packPrice %>
+                            </span>
+                            <span  class="text-xs font-medium text-lime-500">
+                                <%= product.brand.discount %>%&nbsp;off
+                            </span>
+                        </div>
+                </div>
+            <!-- </a> -->
+            <div class="text-center">
+                <div class="flex items-center justify-around mt-2">
+                    <!-- <button class="py-2 px-5 rounded-full flex items-center font-bold">
+                        <span class="ml-4">Delete</span>
+                    </button> -->
+                    <a style="color: red;" class="py-2 px-5 rounded-full flex items-center font-bold" href="/admin/delete/products/<%= product._id %>">Delete</a>
+                </div>
+            </div>
+        </a>
+        </div>
+
+        <% }) %>
+</div>
