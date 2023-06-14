@@ -897,7 +897,7 @@ require('./routes/web')(app)
 app.use((req, res) => {
     res.status(404).render('errors/404')
 })
-const PORT = process.env.PORT || 3300;
+const PORT = process.env.PORT || 3400;
 
 const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)

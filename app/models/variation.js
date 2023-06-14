@@ -17,7 +17,7 @@ const variationSchema = new Schema({
     vcode: { type: String, },
     gcode: { type: String },
 
-    image: [
+    image: [    
         {
             imgName: {
                 type: String,
